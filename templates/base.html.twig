@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" type="text/css" src="{{"asset('css/css.css')"}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('css/css.css')}}">
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
@@ -15,8 +15,8 @@
     <body>
         <nav>
             <ul>
-                <li><a href="">Acceuil</a></li>
-                <li><a href="">Reservation</a></li>
+                <li><a href="{{path('App_home')}}">Acceuil</a></li>
+                <li><a href="{{path('app_billet')}}">Reservation</a></li>
                 <li><a href="">Contact</a></li>
             </ul>
         </nav>
@@ -26,5 +26,6 @@
             {% block body %}
             {% endblock %}
         </div>
+        <script src="{{asset("js/slide.js")}}"></script>
     </body>
 </html>

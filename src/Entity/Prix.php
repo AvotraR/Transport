@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PrixRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PrixRepository::class)]
@@ -21,6 +23,9 @@ class Prix
 
     #[ORM\ManyToOne(inversedBy: 'prixes')]
     private ?Categorie $Categorie = null;
+
+    #[ORM\ManyToOne(inversedBy: 'prixes')]
+    private ?Depart $depart = null;
 
     public function getId(): ?int
     {
@@ -62,4 +67,17 @@ class Prix
 
         return $this;
     }
+
+    public function getDepart(): ?Depart
+    {
+        return $this->depart;
+    }
+
+    public function setDepart(?Depart $depart): self
+    {
+        $this->depart = $depart;
+
+        return $this;
+    }
+
 }

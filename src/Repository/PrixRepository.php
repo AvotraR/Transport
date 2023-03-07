@@ -39,27 +39,32 @@ class PrixRepository extends ServiceEntityRepository
         }
     }
     public function searchPrix($billet){
-        //fonction midika hoe tedavo ny prix mifandraika @ ty billet ty
-        $query = $this->createQueryBuilder('p');
-        
-        // raha misy valeur ao @ categorie
-        if ($billet->getCategorie()){ 
-            //join(ampifandraiso@ Categorie za (omeo annarana io fifandraisana io hoe "cat"))
-            //categorie izay azo avy @ prix->categorie avadika hoe"p.categorie"
-            $query = $query->join('p.Categorie', 'cat')
-            /*  ny code eto ambany maneho fa afaka maka id any categorie tsika prix->categorie->id
-                efa nahazo alias cat tsika ka au lieu de prix->categorie->id dia "cat.id"
-                andWhere(ou(id ny categorie azo ve ao anaty categorie "izay azo avy @ billet"))
-                andWhere(cat.it correspond id-cat-billet)
-            */
-                          ->andWhere('cat.id IN (:categorie)')
-                           ->setParameter('categorie',$billet->getCategorie());
-        }
-        if($billet->getDestination()){
-                $query =$query->join('p.destination','dest')
-                              ->andWhere('dest.id IN (:destination)')
-                              ->setParameter('destination',$billet->getDestination());
-        }
+            //fonction midika hoe tedavo ny prix mifandraika @ ty billet ty
+            $query = $this->createQueryBuilder('p');
+            
+            // raha misy valeur ao @ categorie
+            if ($billet->getCategorie()){ 
+                //join(ampifandraiso@ Categorie za (omeo annarana io fifandraisana io hoe "cat"))
+                //categorie izay azo avy @ prix->categorie avadika hoe"p.categorie"
+                $query = $query->join('p.Categorie', 'cat')
+                /*  ny code eto ambany maneho fa afaka maka id any categorie tsika prix->categorie->id
+                    efa nahazo alias cat tsika ka au lieu de prix->categorie->id dia "cat.id"
+                    andWhere(ou(id ny categorie azo ve ao anaty categorie "izay azo avy @ billet"))
+                    andWhere(cat.it correspond id-cat-billet)
+                */
+                            ->andWhere('cat.id IN (:categorie)')
+                            ->setParameter('categorie',$billet->getCategorie());
+            }
+            if($billet->getDestination()){
+                    $query =$query->join('p.destination','dest')
+                                ->andWhere('dest.id IN (:destination)')
+                                ->setParameter('destination',$billet->getDestination());
+            }
+            if($billet->getDepart()){
+                    $query=$query->join('p.depart','dep')
+                                 ->AndWhere('dep.id IN (:depart)')
+                                 ->SetParameter('depart',$billet->getDepart());
+            }
         return $query->getQuery()->getResult();
     }
 

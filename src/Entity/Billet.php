@@ -19,6 +19,9 @@ class Billet
     #[ORM\ManyToOne(inversedBy: 'billets')]
     private ?Categorie $categorie = null;
 
+    #[ORM\ManyToOne(inversedBy: 'billets')]
+    private ?depart $depart = null;
+
 
     public function getId(): ?int
     {
@@ -45,6 +48,18 @@ class Billet
     public function setCategorie(?Categorie $categorie): self
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getDepart(): ?depart
+    {
+        return $this->depart;
+    }
+
+    public function setDepart(?depart $depart): self
+    {
+        $this->depart = $depart;
 
         return $this;
     }

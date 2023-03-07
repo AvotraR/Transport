@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Destination;
 use App\Entity\Categorie;
+use App\Entity\Depart;
 
 class BilletType extends AbstractType
 {
@@ -22,6 +23,10 @@ class BilletType extends AbstractType
             ->add('categorie',EntityType::class,[
                 'class'=>Categorie::class,
                 'choice_label'=>"categorie"
+            ])
+            ->add('depart',EntityType::class,[
+                'class'=>Depart::class,
+                'choice_label'=>"ville"
             ])
         ;
     }

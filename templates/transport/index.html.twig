@@ -1,21 +1,29 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 <h1>BONJOUR</h1>
-<div id="container-billet">
-    {{form_start(formBillet)}}
-    {{form_row(formBillet.destination)}}
-    {{form_row(formBillet.categorie)}}
-    <div class="prix">
-        {%for prix in prixT%}
-            {{prix.prix}}ar
-        {%endfor%}
+<div class="builder">
+    <div class="container-billet">
+        {{form_start(formBillet)}}
+        {{form_row(formBillet.destination)}}
+        {{form_row(formBillet.categorie)}}
+        {{form_row(formBillet.depart)}}
+        <div class="prix">
+            {%for prix in prixT%}
+                {{prix.prix}}ar
+            {%endfor%}
+        </div>
+        <div class="voiture">
+            {%for voiture in voitureDispo%}
+                {{voiture.numero}}
+            {%endfor%}
+        </div>
+        <button type="submit">Envoyer</button>
+        {{form_end(formBillet)}}
     </div>
-    <div class="voiture">
-        {%for voiture in voitureDispo%}
-            {{voiture.numero}}
-        {%endfor%}
+    <div class="container-colis">
+       <h1>tutututututu</h1>
+       <h2>lalalalalalal</h2>
     </div>
-    <button type="submit">Envoyer</button>
-    {{form_end(formBillet)}}
+    
 </div>
 {% endblock %}

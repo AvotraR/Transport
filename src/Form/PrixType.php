@@ -15,6 +15,7 @@ class PrixType extends AbstractType
             ->add('prix')
             ->add('destination')
             ->add('Categorie')
+            ->add('depart')
         ;
     }
 

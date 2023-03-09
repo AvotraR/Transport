@@ -16,6 +16,10 @@ class BilletType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('Nom')
+            ->add('Prenom')
+            ->add('Telephone')
+            ->add('CIN')
             ->add('destination',EntityType::class,[
                 'class'=>Destination::class,
                 'choice_label'=>"ville"
@@ -28,6 +32,7 @@ class BilletType extends AbstractType
                 'class'=>Depart::class,
                 'choice_label'=>"ville"
             ])
+            ->add('DateReservation')
         ;
     }
 

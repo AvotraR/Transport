@@ -33,6 +33,7 @@ class BilletType extends AbstractType
                 'choice_label'=>"ville"
             ])
             ->add('DateReservation')
+            ->add('quantite')
         ;
     }
 

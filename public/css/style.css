@@ -9,7 +9,6 @@ nav{
     background-color:rgba(0, 0, 0, 0.692);
     display: inline-flex;
     justify-content:center;
-    
 }
 ul{
     display: inline-flex;
@@ -30,7 +29,7 @@ ul li a{
 }
 .head{
     width:100%;
-    height:650px;
+    height:550px;
     background-image: url('../img/5.jpg');
     background-color: rgba(0, 0, 0, 0.685);
     background-repeat: no-repeat;
@@ -41,7 +40,7 @@ ul li a{
     justify-content: center;
     position:relative;
     width:100%;
-    top: 40%;
+    top: 40px;
 }
 .card{
     display:inline-flex;

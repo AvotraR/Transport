@@ -21,16 +21,19 @@ class TransportController extends AbstractController
        $billet = new Billet(); 
        $prix = 0;
        $voiture = 0;
+       $quantite = 0;
         $form = $this->createForm(BilletType::class,$billet);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form-> isValid()){
             $prix = $prixRepo->searchPrix($billet);
             $voiture = $voitureRep->searhVoit($billet);
+            $quantite = $billet->getQuantite();
        }
         return $this->render('transport/index.html.twig', [
             'controller_name' => 'TransportController',
             'formBillet' => $form->createView(),
             'prixT'=>$prix,
+            'quantite'=>$quantite,
             "voitureDispo"=>$voiture
 
         ]);

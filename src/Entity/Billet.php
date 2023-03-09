@@ -38,6 +38,12 @@ class Billet
     #[ORM\Column]
     private ?int $CIN = null;
 
+    #[ORM\Column]
+    private ?int $prix = null;
+
+    #[ORM\Column]
+    private ?int $quantite = null;
+
 
 
     public function getId(): ?int
@@ -137,6 +143,30 @@ class Billet
     public function setCIN(int $CIN): self
     {
         $this->CIN = $CIN;
+
+        return $this;
+    }
+
+    public function getPrix(): ?int
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(int $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getQuantite(): ?int
+    {
+        return $this->quantite;
+    }
+
+    public function setQuantite(int $quantite): self
+    {
+        $this->quantite = $quantite;
 
         return $this;
     }

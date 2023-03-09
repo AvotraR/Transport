@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig'%}
 {% block body %}
 <div class="builder">
     <div class="container-billet">
@@ -27,10 +27,13 @@
             <div class="col">
                 {{form_row(formBillet.DateReservation)}}
             </div>
+            <div class="col">
+                {{form_row(formBillet.quantite)}}
+            </div>
             <div class="prix">
                 {%for prix in prixT%}
                     <label for="">Prix</label>
-                   <input type="text" placeholder="Prix" Value={{prix.prix}}ar> 
+                   <input type="text" placeholder="{{prix.prix }}ar * {{quantite}}" readonly> 
                 {%endfor%}
             </div>
             <div class="voiture">

@@ -72,11 +72,22 @@ ul li a{
     width:100%;
 }
 .builder .container-billet{
-    width:40%;
+    display:flex;
+    width:100%;
     border:1px solid;
     border-radius: 10px;
-    padding:40px;
+    padding:20px;
     margin:20px;
+    height:300px;
+}
+.container-billet .row{
+    width:50%;
+    margin: 20px;
+}
+.prixInput{
+    border:2px solid red;
+    border-radius: 10px;
+    transition: 1.6s All;
 }
 .container-billet .col{
     margin-top:10px;
@@ -99,15 +110,32 @@ ul li a{
 .container-billet #billet_DateReservation select{
     width:60px;
 }
-.container-image{
-    display:flex;
-    flex-direction: column;
-    width:60%;
-    margin:10px;
-}
+
 .container-image img{
     width:50%;
 }
-.submit-button{
-    width:80px;
+.buttonValid{
+    display:inline-flex;
+    width:100%;
+    margin-top: 30px;
+}
+.buttonValid button{
+    position:relative;
+    left:0px;
+    border:2px solid;
+    border-radius: 20px;
+    width:200px;
+    height:100%;
+    padding:20px;
+    margin-right: 20px;
+}
+.btnPaye a{
+    display: none;
+    text-align: center;
+    border:2px solid;
+    border-radius: 20px;
+    width:100%;
+    padding: 20px;
+    text-decoration: none;
+    margin-bottom:0px;
 }

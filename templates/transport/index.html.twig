@@ -2,53 +2,68 @@
 {% block body %}
 <div class="builder">
     <div class="container-billet">
-        {{form_start(formBillet)}}
+        <div class="row">
+
+            {{form_start(formBillet)}}
+                <div class="col">
+                    {{form_row(formBillet.Nom)}}
+                </div>
+                <div class="col">
+                    {{form_row(formBillet.Prenom)}}
+                </div>
+                <div class="col">
+                    {{form_row(formBillet.Telephone)}}
+                </div>
+                <div class="col">
+                    {{form_row(formBillet.CIN)}}
+                </div>
+                <div class="col">
+                    {{form_row(formBillet.DateReservation)}}
+                </div>
+        </div>
+        <div class="row">
+            
             <div class="col">
-                {{form_row(formBillet.Nom)}}
-            </div>
-            <div class="col">
-                {{form_row(formBillet.Prenom)}}
-            </div>
-            <div class="col">
-                {{form_row(formBillet.Telephone)}}
-            </div>
-            <div class="col">
-                {{form_row(formBillet.CIN)}}
+                {{form_row(formBillet.destination)}}
             </div>
             <div class="col">
                 {{form_row(formBillet.depart)}}
             </div>
             <div class="col">
-                {{form_row(formBillet.destination)}}
-            </div>
-            <div class="col">
                 {{form_row(formBillet.categorie)}}
-            </div>
-            <div class="col">
-                {{form_row(formBillet.DateReservation)}}
             </div>
             <div class="col">
                 {{form_row(formBillet.quantite)}}
             </div>
-            <div class="prix">
+            <div class="col">
                 {%for prix in prixT%}
                     <label for="">Prix</label>
-                   <input type="text" placeholder="{{prix.prix }}ar * {{quantite}}" readonly> 
+                    <input type="text" class ="prixInput" placeholder="{{prix.prix }}ar * {{quantite}}" readonly> 
                 {%endfor%}
             </div>
-            <div class="voiture">
+            <div class="col">
                 {%for voiture in voitureDispo%}
                     {{voiture.numero}}
                 {%endfor%}
             </div>
-            <button type="submit" class="submit-button">Verifier</button>
+            <div class="buttonValid">
+                <div class="btnVerfy" id="verifie">
+                    <button type="submit">Verifier</button>
+                </div>
+                <div class="btnPaye">
+                    <a href="{{path('App_payer')}}" id="paiement">Passer au paiement</a>
+                </div>
+            </div>
         {{form_end(formBillet)}}
-    </div>
-    <div class="container-image">
-        <h1>Fait votre reservation</h1>
-        <h1>TRANSPORT</h1>
-        <p>Votre meilleur company de voyage</p>
-        <img src="{{asset("img/1.jpg")}}" alt="">
+        </div>
     </div>
 </div>
+<script>
+    var paie = document.getElementById('paiement');
+    var verifie = document.getElementById('verifie');
+    verifie.addEventListener('click',eventPaie());
+    function eventPaie(){
+        paie.style.display="block";
+    }
+</script>
 {% endblock %}

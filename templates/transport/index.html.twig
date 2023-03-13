@@ -1,69 +1,60 @@
 {% extends 'base.html.twig'%}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{asset('css/rsv.css')}}">
+{% endblock %}
 {% block body %}
 <div class="builder">
     <div class="container-billet">
-        <div class="row">
-
-            {{form_start(formBillet)}}
-                <div class="col">
-                    {{form_row(formBillet.Nom)}}
+        <div class="left">
+        {{form_start(formBillet)}}
+            <div class="block">
+                <div class="row ">
+                    <div class="col">{{form_row(formBillet.Nom)}}</div>
+                    <div class="col">{{form_row(formBillet.Prenom)}}</div>
+                    <div class="col">{{form_row(formBillet.Telephone)}}</div>
+                    <div class="col">{{form_row(formBillet.CIN)}}</div>
                 </div>
-                <div class="col">
-                    {{form_row(formBillet.Prenom)}}
+                <div class="row">
+                        <div class="col">{{form_row(formBillet.depart)}}</div>
+                        <div class="col">{{form_row(formBillet.destination)}}</div>
+                        <div class="col">{{form_row(formBillet.categorie)}}</div>
+                        <div class="col">{{form_row(formBillet.quantite)}}</div>
                 </div>
-                <div class="col">
-                    {{form_row(formBillet.Telephone)}}
-                </div>
-                <div class="col">
-                    {{form_row(formBillet.CIN)}}
-                </div>
-                <div class="col">
+            </div>
+            <div class="block">
+                <div class="row">
                     {{form_row(formBillet.DateReservation)}}
                 </div>
+
+                <div class="row">
+                        {%for prix in prixT%}
+                        <div class="col">
+                            <label for="">Prix</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class ="prixInput" placeholder="{{prix.prix }}ar * {{quantite}}" readonly> 
+                        </div>
+                        {%endfor%}
+                        {%for voiture in voitureDispo%}
+                            {{voiture.numero}}
+                        {%endfor%}
+                </div>
+            </div>
+            <div class="block" id="btn">
+                <div class="row">
+                    <div class="btn-action">
+                        <button type="submit" id="verifie">Verifier</button>
+                        {%if(paie == true)%}
+                            <a href="{{path('App_payer')}}" id="paye">Passer au paiement</a>
+                        {%endif%}
+                    </div>
+                </div>
+            </div>
+        {{form_end(formBillet)}}   
         </div>
-        <div class="row">
-            
-            <div class="col">
-                {{form_row(formBillet.destination)}}
-            </div>
-            <div class="col">
-                {{form_row(formBillet.depart)}}
-            </div>
-            <div class="col">
-                {{form_row(formBillet.categorie)}}
-            </div>
-            <div class="col">
-                {{form_row(formBillet.quantite)}}
-            </div>
-            <div class="col">
-                {%for prix in prixT%}
-                    <label for="">Prix</label>
-                    <input type="text" class ="prixInput" placeholder="{{prix.prix }}ar * {{quantite}}" readonly> 
-                {%endfor%}
-            </div>
-            <div class="col">
-                {%for voiture in voitureDispo%}
-                    {{voiture.numero}}
-                {%endfor%}
-            </div>
-            <div class="buttonValid">
-                <div class="btnVerfy" id="verifie">
-                    <button type="submit">Verifier</button>
-                </div>
-                <div class="btnPaye">
-                    <a href="{{path('App_payer')}}" id="paiement">Passer au paiement</a>
-                </div>
-            </div>
-        {{form_end(formBillet)}}
+        <div class="right">
+             <h1>Vous pouvez faire votre reservation</h1>
         </div>
     </div>
 </div>
-<script>
-    var paie = document.getElementById('paiement');
-    var verifie = document.getElementById('verifie');
-    verifie.addEventListener('click',eventPaie());
-    function eventPaie(){
-        paie.style.display="block";
-    }
-</script>
 {% endblock %}

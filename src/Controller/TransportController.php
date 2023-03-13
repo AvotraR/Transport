@@ -25,6 +25,7 @@ class TransportController extends AbstractController
        $prix = 0;
        $voiture = 0;
        $quantite = 0;
+       $paie = false;
         $form = $this->createForm(BilletType::class,$billet);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form-> isValid()){
@@ -34,6 +35,7 @@ class TransportController extends AbstractController
             $session->get("billet", []);
             $facture = $facture->payer($billet,$prix);    
             $dataBillet = $session->set("billet",$facture);
+            $paie = true;
        }
         return $this->render('transport/index.html.twig', [
             'controller_name' => 'TransportController',
@@ -41,6 +43,7 @@ class TransportController extends AbstractController
             'prixT'=>$prix,
             'quantite'=>$quantite,
             "voitureDispo"=>$voiture,
+            'paie'=>$paie
 
         ]);
     }

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %} Erreur {% endblock %}
+{% block body %}
+    <div>
+        <div class="mR-60"><img alt="#" src="{{ asset('img/404.png') }}"></div>
+        <div>
+            <h3>Page innexistent</h3>
+            <p>Le page que vous avez demander n'existe pas.</p>
+            <div><a href="{{ path('App_home') }}">Aller à la page d'accueil</a></div>
+        </div>
+    </div>
+{% endblock %}

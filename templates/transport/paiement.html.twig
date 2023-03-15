@@ -1,24 +1,33 @@
 {% extends 'base.html.twig' %}
-{%block header%}
+{%block stylesheets%}
+<link rel="stylesheet" type="text/css" href="{{asset('css/paiement.css')}}">
 {%endblock%}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-<h1>BONJOUR</h1>
 <div class="container-fact">
-    <p>Nom :{{billet.Nom}}</p>
-    <p>Prenom {{billet.Prenom}}</p>
-    <p>CIN :{{billet.CIN}}</p>
-    <p>Depart :{{billet.depart.ville}}</p>
-    <p>Destination :{{billet.destination.ville}}</p>
-    <p>Categorie :{{billet.categorie.categorie}}</p>
-    <p>Date de depart :{{billet.DateReservation|date('d/m/y')}}</p>
-    <p>Nb personne :{{billet.quantite}}</p>
-    <p>---------------------------------</p>
-    <p>Prix total :{{billet.prix}}</p>
-    
+    <div class="builder">
+        <div class="block-l">
+            <p>Nom :{{billet.Nom}}</p>
+            <p>Prenom {{billet.Prenom}}</p>
+            <p>CIN :{{billet.CIN}}</p>
+            <p>Depart :{{billet.depart.ville}}</p>
+            <p>Destination :{{billet.destination.ville}}</p>
+            <p>Categorie :{{billet.categorie.categorie}}</p>
+            <p>Date de depart :{{billet.DateReservation|date('d/m/y')}}</p>
+            <p>Nb personne :{{billet.quantite}}</p>
+            <p>---------------------------------</p>
+            <p>Prix total :{{billet.prix}}</p>
+            <button>Payer</button>
+        </div>
+        <div class="block-r">
+            <h1>Mode de paiement</h1>
+            <div class="logo">
+                <img src="{{asset('img/2.jpg')}}" alt="">
+                <img src="{{asset('img/2.jpg')}}" alt="">
+                <img src="{{asset('img/2.jpg')}}" alt="">
+            </div>
+        </div>
+    </div>
 </div>
+
 
 {% endblock %}

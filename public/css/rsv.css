@@ -7,7 +7,7 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
-.container-billet{
+#container-billet{
     display:flex;
     background-color: rgba(0, 0, 0, 0);
     border:1px solid transparent;
@@ -88,12 +88,12 @@
 }
 .right h1{
     font-size: 20px;
-    color:beige;
+    color:rgb(255, 0, 0);
     margin:auto;
     padding: 10px;
-    border:1px solid ;
+    border:1px solid rgb(255, 0, 0);
     border-radius: 20px;
-    background-color: rgb(255, 0, 0);
+    background-color: transparent;
 }
 #verifie{
     width: 200px;
@@ -110,4 +110,55 @@
     padding : 10px;
     border:1px solid;
     border-radius: 20px;
+}
+/* ty le voiture */
+#container-voiture{
+    display:none;
+    position:absolute;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0);
+    border:1px solid transparent;
+    border-radius: 10px;
+    box-shadow: 3px 3px 6px;
+    margin: 60px;
+    padding:0px;
+    width:80%;
+    height: 600px;
+}
+.voiture{
+    display:flex;
+    justify-content: center;
+    margin:10px;
+    padding: 20px;
+    width:80%;
+    border:1px solid transparent;
+    border-radius: 10px;
+    background-color: rgb(27, 27, 27);
+}
+.place{
+    border:1px solid red;
+    width: 170px;
+    height:200px;
+}
+.place .row{
+    display:flex;
+}
+.place .row .pl{
+    border:1px solid red;
+    width: 20px;
+    height:20px;
+    margin:8px;
+}
+.btnChange{
+    cursor: pointer;
+  position: absolute;
+  top: 80%;
+  right: 40px;
+  width: auto;
+  margin-top: -22px;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
 }

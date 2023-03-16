@@ -17,7 +17,7 @@
             </tr>
             <tr>
                 <th>Place</th>
-                <td>{{ voiture.places}}</td>
+                <td>{{ voiture.place ? voiture.place|join(', ') : '' }}</td>
             </tr>
         </tbody>
     </table>

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\VoitureRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,7 +24,6 @@ class Voiture
 
     #[ORM\ManyToOne(inversedBy: 'voitures')]
     private ?categorie $categorie = null;
-
 
 
     public function getId(): ?int
@@ -65,5 +66,6 @@ class Voiture
 
         return $this;
     }
+
 
 }

@@ -2,18 +2,19 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Prix;
+use App\Entity\Billet;
+use App\Form\BilletType;
+use App\Form\VoitureType;
+use App\service\PaiementService;
 use App\Repository\PrixRepository;
 use App\Repository\VoitureRepository;
-use App\Form\BilletType;
-use App\Entity\Billet;
-use App\Entity\Prix;
-use App\service\PaiementService;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TransportController extends AbstractController
 {
@@ -34,7 +35,7 @@ class TransportController extends AbstractController
             $quantite = $billet->getQuantite();
             $session->get("billet", []);
             $facture = $facture->payer($billet,$prix);    
-            $dataBillet = $session->set("billet",$facture);
+            $dataBillet = $session->set("billet",$facture);    
             $paie = true;
        }
         return $this->render('transport/index.html.twig', [

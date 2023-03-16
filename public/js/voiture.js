@@ -7,14 +7,13 @@ function openV(){
     containerBillet.style.display="none";
     containerVoiture.style.display="flex";
 }
-if (voit.length>1){
-    console.log(voit[1]);
-}
 function change(n){
     for(i=0;i<=place.length;i++){
         if(i==n){
             place[i-1].style.backgroundColor="red";
         }
-
     }
+}    
+for(i=0;i<voit.length;i++){
+    console.log(voit[i].childNodes);
 }

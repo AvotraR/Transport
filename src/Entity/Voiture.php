@@ -24,6 +24,7 @@ class Voiture
     private ?categorie $categorie = null;
 
 
+
     public function getId(): ?int
     {
         return $this->id;
@@ -65,5 +66,4 @@ class Voiture
         return $this;
     }
 
- 
 }

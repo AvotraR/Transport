@@ -25,7 +25,18 @@ class Voiture
     #[ORM\ManyToOne(inversedBy: 'voitures')]
     private ?categorie $categorie = null;
 
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private array $place = [];
 
+    #[ORM\OneToMany(mappedBy: 'voiture', targetEntity: Billet::class)]
+    private Collection $billets;
+
+    public function __construct()
+    {
+        $this->billets = new ArrayCollection();
+    }
+
+   
     public function getId(): ?int
     {
         return $this->id;
@@ -67,5 +78,44 @@ class Voiture
         return $this;
     }
 
+    public function getPlace(): ?array
+    {
+        return $this->place;
+    }
+
+    public function setPlace(?array $place): void
+    {
+        $this->place = $place;
+    }
+
+    /**
+     * @return Collection<int, Billet>
+     */
+    public function getBillets(): Collection
+    {
+        return $this->billets;
+    }
+
+    public function addBillet(Billet $billet): self
+    {
+        if (!$this->billets->contains($billet)) {
+            $this->billets[] = $billet;
+            $billet->setVoiture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBillet(Billet $billet): self
+    {
+        if ($this->billets->removeElement($billet)) {
+            // set the owning side to null (unless already changed)
+            if ($billet->getVoiture() === $this) {
+                $billet->setVoiture(null);
+            }
+        }
+
+        return $this;
+    }
 
 }

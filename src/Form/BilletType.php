@@ -3,13 +3,16 @@
 namespace App\Form;
 
 use App\Entity\Billet;
+use App\Entity\Depart;
+use App\Entity\Voiture;
+use App\Entity\Categorie;
+use App\Form\VoitureType;
+use App\Entity\Destination;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use App\Entity\Destination;
-use App\Entity\Categorie;
-use App\Entity\Depart;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class BilletType extends AbstractType
 {
@@ -40,7 +43,6 @@ class BilletType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Billet::class,
         ]);
     }
 }

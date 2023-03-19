@@ -44,6 +44,13 @@ class Billet
     #[ORM\Column]
     private ?int $quantite = null;
 
+    #[ORM\ManyToOne(inversedBy: 'billets')]
+    private ?voiture $voiture = null;
+
+    #[ORM\Column(type: Types::ARRAY)]
+    private array $place = [];
+
+
 
 
     public function getId(): ?int
@@ -170,6 +177,31 @@ class Billet
 
         return $this;
     }
+
+    public function getVoiture(): ?voiture
+    {
+        return $this->voiture;
+    }
+
+    public function setVoiture(?voiture $voiture): self
+    {
+        $this->voiture = $voiture;
+
+        return $this;
+    }
+
+    public function getPlace(): array
+    {
+        return $this->place;
+    }
+
+    public function setPlace(array $place): self
+    {
+        $this->place = $place;
+
+        return $this;
+    }
+
 
 
 }

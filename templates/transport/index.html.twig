@@ -27,7 +27,7 @@
                 <div class="row">
                     {{form_row(formBillet.DateReservation)}}
                 </div>
-
+                
                 <div class="row">
                         {%for prix in prixT%}
                         <div class="col">
@@ -55,50 +55,7 @@
         </div>
     </div>
     <div id="container-voiture">
-        {%for voiture in voitureDispo%}
-        
-            <div class="voiture">
-                <div class="type">
-                    <H1>VIP</H1>
-                </div>
-                <div class="num">
-                    <h1>
-                        {{voiture.numero}}</h1>
-                </div>
-                <div class="place">
-
-                    <div class="row">
-                        <div class="col"></div>
-                        <div class="pl" onclick="change(1)">1</div>
-                        <div class="pl" onclick="change(2)">2</div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="pl" onclick="change(3)">3</div>
-                        <div class="pl" onclick="change(4)">4</div>
-                        <div class="pl" onclick="change(5)">5</div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="pl" onclick="change(6)">6</div>
-                        <div class="pl" onclick="change(7)">7</div>
-                        <div class="pl" onclick="change(8)">8</div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="pl" onclick="change(9)">9</div>
-                        <div class="pl" onclick="change(10)">10</div>
-                        <div class="pl" onclick="change(11)">11</div>
-                    </div>
-                    <div class="row">
-                        <div class="pl" onclick="change(12)">12</div>
-                        <div class="pl" onclick="change(13)">13</div>
-                        <div class="pl" onclick="change(14)">14</div>
-                        <div class="pl" onclick="change(15)">15</div>
-                    </div>
-                </div>
-            </div>
-        {%endfor%}
+           
     </div>
     {{form_end(formBillet)}} 
 </div>

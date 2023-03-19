@@ -140,25 +140,12 @@
     width: 170px;
     height:200px;
 }
-.place .row{
+.place table tbody tr{
     display:flex;
+    flex-wrap: wrap;
 }
-.place .row .pl{
-    border:1px solid red;
-    width: 20px;
-    height:20px;
-    margin:8px;
-}
-.btnChange{
-    cursor: pointer;
-  position: absolute;
-  top: 80%;
-  right: 40px;
-  width: auto;
-  margin-top: -22px;
-  padding: 10px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
+td{
+    border:1px solid rgb(47, 0, 255);
+    width:40px;
+    height:30px;
 }

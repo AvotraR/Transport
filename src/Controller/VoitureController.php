@@ -27,9 +27,10 @@ class VoitureController extends AbstractController
         $voiture = new Voiture();
         $form = $this->createForm(VoitureType::class, $voiture);
         $form->handleRequest($request);
-
+        $voiture->setPlace([true,true,true,false,true,true,true,false,false]);
         if ($form->isSubmitted() && $form->isValid()) {
             $voitureRepository->add($voiture, true);
+
 
             return $this->redirectToRoute('app_voiture_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -39,7 +40,7 @@ class VoitureController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    
     #[Route('/{id}', name: 'app_voiture_show', methods: ['GET'])]
     public function show(Voiture $voiture): Response
     {

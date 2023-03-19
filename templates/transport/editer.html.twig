@@ -1,0 +1,20 @@
+{% extends 'base.html.twig'%}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{asset('css/yy.css')}}">
+{% endblock %}
+{% block body %}
+{{form_start(form)}}
+{%for voiture in voitures%}
+    <h1>{{voitures.categorie}}</h1>
+    {{form_row(form['voitures_'~voiture.id].place)}}
+    {{form_row(form['voitures_'~voiture.id].categorie.categorie)}}
+{% endfor %}
+{{form_end(form)}}
+<script>
+var table = document.getElementsByTagName('Input');
+tab();
+function tab(){
+    console.log($table)
+}
+</script>
+{%endblock%}

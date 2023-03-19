@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Prix;
 use App\Entity\Billet;
+use App\Form\PlaceType;
 use App\Form\BilletType;
 use App\Form\VoitureType;
+use App\Form\VoitureModType;
 use App\service\PaiementService;
 use App\Repository\PrixRepository;
 use App\Repository\VoitureRepository;
@@ -35,18 +37,45 @@ class TransportController extends AbstractController
             $quantite = $billet->getQuantite();
             $session->get("billet", []);
             $facture = $facture->payer($billet,$prix);    
-            $dataBillet = $session->set("billet",$facture);    
-            $paie = true;
-       }
+            $dataBillet = $session->set("billet",$facture); 
+            $session->get("voiture", []);  
+            $dataVoiture = $session->set("voiture",$voiture); 
+            $paie = true; 
+            return $this->redirectToRoute('App_place_voiture', [], Response::HTTP_SEE_OTHER);
+        }
         return $this->render('transport/index.html.twig', [
             'controller_name' => 'TransportController',
             'formBillet' => $form->createView(),
             'prixT'=>$prix,
             'quantite'=>$quantite,
             "voitureDispo"=>$voiture,
-            'paie'=>$paie
+            'paie'=>$paie,
 
         ]);
+    }
+    #[Route ('/billet/edit', name:'App_place_voiture')]
+    public function place(SessionInterface $session,Request $request,EntityManagerInterface $manager,VoitureRepository $voitureRepository){
+            $voitures = $session->get("voiture");
+            $formBuilder=$this->createFormBuilder();
+            foreach($voitures as $voiture){
+                $formBuilder->add('voiture_'.$voiture->getId(),VoitureModType::class,['data'=>$voiture]);
+            }
+            $form = $formBuilder->getForm();
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form-> isValid()){       
+                foreach($voitures as $voiture){
+                    $voitureModifier = $form->get('voitures_'.$voiture->getId())->getData();
+                    $voiture->setDestination($voitureModifier->getDestination());
+                    $voiture->setPlace($voitureModifier->getPlace());
+                    $manager->persist($voiture);
+                }
+                $manager->flush();
+            }
+            return $this->render('transport/editer.html.twig', [
+                        'controller_name' => 'TransportController',
+                        'form' => $form->createView(),
+                        'voitures'=>$voiture
+            ]);   
     }
     #[Route('/billet/paiement', name:'App_payer')]
     public function payer(SessionInterface $session){

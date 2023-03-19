@@ -14,6 +14,3 @@ function change(n){
         }
     }
 }    
-for(i=0;i<voit.length;i++){
-    console.log(voit[i].childNodes);
-}

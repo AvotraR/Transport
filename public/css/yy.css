@@ -1,0 +1,22 @@
+fieldset{
+    display:flex;
+    width: 150px;
+}
+
+select{
+    display:none;
+}
+legend{
+    display:none;
+}
+.check{
+    border:1px solid;
+    margin: 8px;
+    text-align: center;
+    cursor:pointer;
+}
+.conteneur{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: center;
+}

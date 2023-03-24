@@ -31,6 +31,9 @@ class Voiture
     #[ORM\OneToMany(mappedBy: 'voiture', targetEntity: Billet::class)]
     private Collection $billets;
 
+    #[ORM\Column]
+    private ?int $NbPlace = null;
+
     public function __construct()
     {
         $this->billets = new ArrayCollection();
@@ -114,6 +117,18 @@ class Voiture
                 $billet->setVoiture(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNbPlace(): ?int
+    {
+        return $this->NbPlace;
+    }
+
+    public function setNbPlace(int $NbPlace): self
+    {
+        $this->NbPlace = $NbPlace;
 
         return $this;
     }

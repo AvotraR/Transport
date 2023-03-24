@@ -50,9 +50,9 @@ class VoitureRepository extends ServiceEntityRepository
                            ->AndWhere('dest.id IN (:destination)')
                            ->setParameter('destination',$billet->getDestination());
         }
-        
         return $query->getQuery()->getResult();
     }
+   
 
 //    /**
 //     * @return Voiture[] Returns an array of Voiture objects

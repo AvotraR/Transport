@@ -54,18 +54,18 @@ class TransportController extends AbstractController
         ]);
     }
     #[Route ('/billet/edit', name:'App_place_voiture')]
-    public function place(SessionInterface $session,Request $request,EntityManagerInterface $manager,VoitureRepository $voitureRepository){
+    public function place(SessionInterface $session,Request $request,VoitureRepository $voitureRep,EntityManagerInterface $manager,VoitureRepository $voitureRepository){
             $voitures = $session->get("voiture");
+            $billet = $session->get("billet");
             $formBuilder=$this->createFormBuilder();
             foreach($voitures as $voiture){
+                $voiture = $voitureRep->find($voiture->getId());
                 $formBuilder->add('voiture_'.$voiture->getId(),VoitureModType::class,['data'=>$voiture]);
-            }
-            $form = $formBuilder->getForm();
-            $form->handleRequest($request);
-            if($form->isSubmitted() && $form-> isValid()){       
-                foreach($voitures as $voiture){
-                    $voitureModifier = $form->get('voitures_'.$voiture->getId())->getData();
-                    $voiture->setDestination($voitureModifier->getDestination());
+            
+                $form = $formBuilder->getForm();
+                $form->handleRequest($request);
+                if($form->isSubmitted() && $form-> isValid()){
+                    $voitureModifier = $form->get('voiture_'.$voiture->getId())->getData();
                     $voiture->setPlace($voitureModifier->getPlace());
                     $manager->persist($voiture);
                 }
@@ -74,7 +74,8 @@ class TransportController extends AbstractController
             return $this->render('transport/editer.html.twig', [
                         'controller_name' => 'TransportController',
                         'form' => $form->createView(),
-                        'voitures'=>$voiture
+                        'voitures'=>$voiture,
+                        'billet'=>$billet
             ]);   
     }
     #[Route('/billet/paiement', name:'App_payer')]

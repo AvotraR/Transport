@@ -9,7 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class VoitureType extends AbstractType
@@ -21,10 +21,12 @@ class VoitureType extends AbstractType
             ->add('Destination',EntityType::class,['class'=>Destination::class,'choice_label'=>"ville"])
             ->add('categorie',EntityType::class,['class'=>Categorie::class,'choice_label'=>"categorie"])
             ->add('place', CollectionType::class, [
-                    'entry_type' =>TextType::class, // Le type de chaque élément de la collection
-                    'allow_add' =>true, // Autoriser l'ajout de nouveaux éléments
-                    'allow_delete' =>true, // Autoriser la suppression d'éléments
+                    'entry_type' =>CheckboxType::class, // Le type de chaque élément de la collection
+                    'allow_add' => true,
+                    'empty_data'=>false,
+                    'required'=>false,
                 ]) 
+            ->add('NbPlace')
         ;
     }
 

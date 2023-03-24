@@ -22,11 +22,13 @@
                 <td>
                         {%for place in voiture.place%} 
                             <tr>
+                                {%for place in place%} 
                                     {%if place == false %}
                                         <td><input type="radio" name="" id="check" value="{{place}} readonly"></td>
                                     {%else%}
                                         <td><input type="radio" name="" id="" value="{{place}}" checked readonly></td>
                                     {%endif%}
+                                {%endfor%}
                             </tr>
                         {%endfor%}
                     </form>

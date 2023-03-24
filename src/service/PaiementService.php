@@ -13,7 +13,7 @@ Class PaiementService{
         return $billet;
         
     }   
-    public function getPayer(){
+    public function getVoiture(){
         return $this->payer();
     }
 }

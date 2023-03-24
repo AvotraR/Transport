@@ -20,7 +20,8 @@
     }
 })();
 var check = document.getElementsByClassName("true_value");
-    for(i=0;i<check.length;i++){
+for(i=0;i<check.length;i++){
+        var Place_prise = document.getElementById("Place_prise");
         var prixTotal = document.getElementById("prixTotal");
         var prix = document.getElementById("prix");
         j=1;
@@ -29,11 +30,13 @@ var check = document.getElementsByClassName("true_value");
                 this.style.backgroundColor="rgb(48, 255, 29)";
                 this.firstChild.checked=true;                 
                 j++;
-                prixTotal.childNodes[3].innerHTML=(prix.value*j);
+                prixTotal.childNodes[3].value=(prix.value*j);
             }else{
                 this.style.backgroundColor="";
                 this.firstChild.checked=false;
-                prixTotal.childNodes[3].innerHTML-=prix.value;
+                prixTotal.childNodes[3].value-=prix.value;
+                Place_prise.placeholder-=this.lastChild.textContent;
+                  
                 j--;
             }
         })

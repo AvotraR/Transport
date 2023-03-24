@@ -1,19 +1,20 @@
-
+{% extends 'base.html.twig'%}
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{asset('css/yy.css')}}">
 {% endblock %}
 {% block body %}
-<div id="prixTotal">
-    <input type="text" id="prix" value="{{billet.prix}}">
-    <h1></h1>
-</div>
+
 {{voitures.categorie.categorie}}
 {{voitures.destination.ville}}
-        {{form_start(form)}}            
+        {{form_start(form)}}   
+            <div id="prixTotal">
+                <input type="hidden" id="prix" value="{{billet.prix}}">
+                <input type="text" id="Place_prise" name="prix" value=""  readonly>
+            </div>         
             {%for voiture in voitures%}
                     {{form_row(form['voitures_'~voiture.id].place,{'attr':{'class':'place'}})}}
             {% endfor %}
-            <button class="btn">{{ button_label|default('Save') }}</button>
+            <button class="btn">{{ button_label|default('Payer') }}</button>
         {{form_end(form)}}
 <script src="{{asset('js/style.js')}}"></script>
 {%endblock%}

@@ -4,9 +4,7 @@ namespace App\Form;
 
 use App\Entity\Billet;
 use App\Entity\Depart;
-use App\Entity\Voiture;
 use App\Entity\Categorie;
-use App\Form\VoitureType;
 use App\Entity\Destination;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -36,7 +34,6 @@ class BilletType extends AbstractType
                 'choice_label'=>"ville"
             ])
             ->add('DateReservation')
-            ->add('quantite')
         ;
     }
 

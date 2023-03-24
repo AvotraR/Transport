@@ -21,7 +21,7 @@ class Billet
     private ?Categorie $categorie = null;
 
     #[ORM\ManyToOne(inversedBy: 'billets')]
-    private ?depart $depart = null;
+    private ?Depart $depart = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $DateReservation = null;
@@ -41,16 +41,8 @@ class Billet
     #[ORM\Column]
     private ?int $prix = null;
 
-    #[ORM\Column]
-    private ?int $quantite = null;
-
     #[ORM\ManyToOne(inversedBy: 'billets')]
     private ?voiture $voiture = null;
-
-    #[ORM\Column(type: Types::ARRAY)]
-    private array $place = [];
-
-
 
 
     public function getId(): ?int
@@ -82,12 +74,12 @@ class Billet
         return $this;
     }
 
-    public function getDepart(): ?depart
+    public function getDepart(): ?Depart
     {
         return $this->depart;
     }
 
-    public function setDepart(?depart $depart): self
+    public function setDepart(?Depart $depart): self
     {
         $this->depart = $depart;
 
@@ -166,18 +158,6 @@ class Billet
         return $this;
     }
 
-    public function getQuantite(): ?int
-    {
-        return $this->quantite;
-    }
-
-    public function setQuantite(int $quantite): self
-    {
-        $this->quantite = $quantite;
-
-        return $this;
-    }
-
     public function getVoiture(): ?voiture
     {
         return $this->voiture;
@@ -189,19 +169,4 @@ class Billet
 
         return $this;
     }
-
-    public function getPlace(): array
-    {
-        return $this->place;
-    }
-
-    public function setPlace(array $place): self
-    {
-        $this->place = $place;
-
-        return $this;
-    }
-
-
-
 }

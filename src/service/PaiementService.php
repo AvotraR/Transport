@@ -8,12 +8,9 @@ Class PaiementService{
         $billet = new Billet();
         $billet=$data;
           foreach($prix as $p){
-            $billet->setPrix((($p->getPrix())*($billet->getQuantite())));
+            $billet->setPrix((($p->getPrix())));
           }
         return $billet;
         
     }   
-    public function getVoiture(){
-        return $this->payer();
-    }
 }

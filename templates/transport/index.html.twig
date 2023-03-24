@@ -20,7 +20,6 @@
                         <div class="col">{{form_row(formBillet.depart)}}</div>
                         <div class="col">{{form_row(formBillet.destination)}}</div>
                         <div class="col">{{form_row(formBillet.categorie)}}</div>
-                        <div class="col">{{form_row(formBillet.quantite)}}</div>
                 </div>
             </div>
             <div class="block">
@@ -28,36 +27,15 @@
                     {{form_row(formBillet.DateReservation)}}
                 </div>
                 
-                <div class="row">
-                        {%for prix in prixT%}
-                        <div class="col">
-                            <label for="">Prix</label>
-                        </div>
-                        <div class="col">
-                            <input type="text" class ="prixInput" placeholder="{{prix.prix }}ar * {{quantite}}" readonly> 
-                        </div>
-                        {%endfor%}
-                </div>
-            </div>
             <div class="block" id="btn">
                 <div class="row">
                     <div class="btn-action">
                         <button type="submit" id="verifie">Verifier</button>
-                        {%if(paie == true)%}
-                        <button id="paye">Passer</button>
-                        {%endif%}
                     </div>
                 </div>
             </div>  
         </div>
-        <div class="right">
-             <h1>Vous pouvez faire votre reservation</h1>
-        </div>
-    </div>
-    <div id="container-voiture">
-           
     </div>
     {{form_end(formBillet)}} 
 </div>
-<script src="{{asset('js/voiture.js')}}"></script>
 {% endblock %}

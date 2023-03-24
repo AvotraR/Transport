@@ -24,17 +24,13 @@ class TransportController extends AbstractController
     #[Route('/billet', name: 'app_billet')]
     public function index(PrixRepository $prixRepo,VoitureRepository $voitureRep,PaiementService $facture,Request $request,EntityManagerInterface $manager,SessionInterface $session): Response
     {
-       $billet = new Billet(); 
-       $prix = 0;
-       $voiture = 0;
-       $quantite = 0;
+       $billet = new Billet();
        $paie = false;
         $form = $this->createForm(BilletType::class,$billet);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form-> isValid()){
             $prix = $prixRepo->searchPrix($billet);
             $voiture = $voitureRep->searhVoit($billet);
-            $quantite = $billet->getQuantite();
             $session->get("billet", []);
             $facture = $facture->payer($billet,$prix);    
             $dataBillet = $session->set("billet",$facture); 
@@ -46,9 +42,6 @@ class TransportController extends AbstractController
         return $this->render('transport/index.html.twig', [
             'controller_name' => 'TransportController',
             'formBillet' => $form->createView(),
-            'prixT'=>$prix,
-            'quantite'=>$quantite,
-            "voitureDispo"=>$voiture,
             'paie'=>$paie,
 
         ]);
@@ -61,12 +54,12 @@ class TransportController extends AbstractController
             foreach($voitures as $voiture){
                 $voiture = $voitureRep->find($voiture->getId());
                 $formBuilder->add('voiture_'.$voiture->getId(),VoitureModType::class,['data'=>$voiture]);
-            
                 $form = $formBuilder->getForm();
                 $form->handleRequest($request);
                 if($form->isSubmitted() && $form-> isValid()){
                     $voitureModifier = $form->get('voiture_'.$voiture->getId())->getData();
                     $voiture->setPlace($voitureModifier->getPlace());
+                    $billet->setPrix($request->request->get('prix'));
                     $manager->persist($voiture);
                 }
                 $manager->flush();

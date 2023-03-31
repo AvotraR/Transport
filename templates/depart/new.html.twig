@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Depart{% endblock %}
+
+{% block body %}
+    <h1>Create new Depart</h1>
+
+    {{ include('depart/_form.html.twig') }}
+
+    <a href="{{ path('app_depart_index') }}">back to list</a>
+{% endblock %}

@@ -1,6 +1,6 @@
 fieldset{
     display:flex;
-    width: 150px;
+    width: 200px;
 }
 
 select{
@@ -12,7 +12,7 @@ legend{
 .check{
     border:1px solid;
     margin: 8px;
-    text-align: center;
+    justify-content: center;
     cursor:pointer;
 }
 .conteneur{

@@ -13,10 +13,10 @@
     border:1px solid transparent;
     border-radius: 10px;
     box-shadow: 3px 3px 6px;
-    margin: 60px;
+    margin: 20px;
     padding:0px;
     width:80%;
-    height: 600px;
+    height: 400px;
 }
 .left{
     display: flex;
@@ -24,7 +24,7 @@
     border-radius: 10px 0px 0px 10px;
     width:60%;
     padding: 10px;
-    background-color: #111;
+    background-color: rgb(252, 252, 252);
 }
 .left .row{
     display:block;

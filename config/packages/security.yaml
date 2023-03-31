@@ -11,6 +11,11 @@ security:
                     class: App\Entity\Utilisateur
                     property: Email
         users_in_memory: { memory: null }
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: numero
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

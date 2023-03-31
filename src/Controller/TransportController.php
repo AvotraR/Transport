@@ -61,8 +61,9 @@ class TransportController extends AbstractController
                     $voiture->setPlace($voitureModifier->getPlace());
                     $billet->setPrix($request->request->get('prix'));
                     $manager->persist($voiture);
+                    $manager->flush();
+                    return $this->redirectToRoute('App_payer', [], Response::HTTP_SEE_OTHER);
                 }
-                $manager->flush();
             }
             return $this->render('transport/editer.html.twig', [
                         'controller_name' => 'TransportController',

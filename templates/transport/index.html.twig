@@ -4,9 +4,7 @@
 {% endblock %}
 {% block body %}
 <div class="builder">
-    <div id="container-billet">
-        
-        <button  class="btnChange" onclick="openV()" >kkkkk</button>
+    <div id="container-billet"> 
         <div class="left">
         {{form_start(formBillet)}}
             <div class="block">
@@ -15,11 +13,9 @@
                     <div class="col">{{form_row(formBillet.Prenom)}}</div>
                     <div class="col">{{form_row(formBillet.Telephone)}}</div>
                     <div class="col">{{form_row(formBillet.CIN)}}</div>
-                </div>
-                <div class="row">
-                        <div class="col">{{form_row(formBillet.depart)}}</div>
-                        <div class="col">{{form_row(formBillet.destination)}}</div>
-                        <div class="col">{{form_row(formBillet.categorie)}}</div>
+                    <div class="col">{{form_row(formBillet.depart)}}</div>
+                    <div class="col">{{form_row(formBillet.destination)}}</div>
+                    <div class="col">{{form_row(formBillet.categorie)}}</div>
                 </div>
             </div>
             <div class="block">

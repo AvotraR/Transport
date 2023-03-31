@@ -12,7 +12,7 @@
         {% endblock %}
     </head>
     <body>
-        <nav>
+        <nav id="nav-hero">
             <ul>
                 <li><a href="{{path('App_home')}}">Acceuil</a></li>
                 <li><a href="{{path('app_billet')}}">Reservation</a></li>
@@ -20,10 +20,10 @@
                 <li><a href="">Contact</a></li>
             </ul>
         </nav>
+        
         {%block header%}
         {%endblock%}
-            {% block body %}
-            {% endblock %}
-        <script src="{{asset("js/slide.js")}}"></script>
+        {% block body %}
+        {% endblock %}
     </body>
 </html>

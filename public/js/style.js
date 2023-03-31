@@ -27,6 +27,7 @@ for(i=0;i<check.length;i++){
         j=1;
         check[i].addEventListener('click',function(e){
             if(!this.style.backgroundColor){
+                prixTotal.style.display="flex";
                 this.style.backgroundColor="rgb(48, 255, 29)";
                 this.firstChild.checked=true;                 
                 j++;

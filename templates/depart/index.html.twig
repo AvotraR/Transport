@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Depart index{% endblock %}
+
+{% block body %}
+    <h1>Depart index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Ville</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for depart in departs %}
+            <tr>
+                <td>{{ depart.id }}</td>
+                <td>{{ depart.ville }}</td>
+                <td>
+                    <a href="{{ path('app_depart_show', {'id': depart.id}) }}">show</a>
+                    <a href="{{ path('app_depart_edit', {'id': depart.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_depart_new') }}">Create new</a>
+{% endblock %}

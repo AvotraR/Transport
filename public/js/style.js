@@ -3,6 +3,7 @@
     var newI = document.createElement('i');
     for(j=0;j<input.length;j++){
         if(input[j].type==="checkbox" || input[j].type==="radio"){
+            input[j].style.display="none";
             input[j].parentNode.parentNode.className="check";
             input[j].parentNode.parentNode.parentNode.className="conteneur";
             input[j].labels.disabled="true";
@@ -14,7 +15,7 @@
                 input[j].parentNode.className+=" true_value";
             }else{
                 input[j].type="radio";
-                input[j].parentNode.parentNode.style.backgroundColor="rgb(48, 255, 29)";
+                input[j].parentNode.parentNode.style.backgroundColor="red";
             }
         }
     }
@@ -29,12 +30,14 @@ for(i=0;i<check.length;i++){
             if(!this.style.backgroundColor){
                 prixTotal.style.display="flex";
                 this.style.backgroundColor="rgb(48, 255, 29)";
+                this.style.opacity="0.8";
                 this.firstChild.checked=true;                 
                 j++;
                 prixTotal.childNodes[3].value=(prix.value*j);
             }else{
                 this.style.backgroundColor="";
                 this.firstChild.checked=false;
+                this.style.opacity="1";
                 prixTotal.childNodes[3].value-=prix.value;
                 Place_prise.placeholder-=this.lastChild.textContent;
                   

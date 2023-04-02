@@ -1,6 +1,6 @@
 fieldset{
     display:flex;
-    width: 200px;
+    width: 150px;
 }
 
 select{
@@ -9,10 +9,21 @@ select{
 legend{
     display:none;
 }
+
 .check{
+    display:block;
+    width: 20px;
     border:1px solid;
     margin: 8px;
-    justify-content: center;
+    cursor:pointer;
+    z-index: 0;
+}
+label{
+    position:relative;
+    z-index: -1;
+}
+.check:hover{
+    
     cursor:pointer;
 }
 .conteneur{

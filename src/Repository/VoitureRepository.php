@@ -52,6 +52,13 @@ class VoitureRepository extends ServiceEntityRepository
         }
         return $query->getQuery()->getResult();
     }
+    public function searchNumVoit(String $numero){
+        $query = $this->createQueryBuilder('v');
+        if($numero){
+            $query=$query->AndWhere('v.numero ='.$numero);
+        }
+        return $query->getQuery()->getResult();
+    }
    
 
 //    /**

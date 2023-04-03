@@ -59,7 +59,12 @@ class TransportController extends AbstractController
                 if($form->isSubmitted() && $form-> isValid()){
                     $voitureModifier = $form->get('voiture_'.$voiture->getId())->getData();
                     $voiture->setPlace($voitureModifier->getPlace());
+                    $id=$voitureRep->find($request->request->get('id_voiture'));
+                    //id du voiture selectionner
                     $billet->setPrix($request->request->get('prix'));
+                    $billet->setVoiture($id);
+                    $billet->setPlace($request->request->get('place_total'));
+                    //on persist
                     $manager->persist($voiture);
                     $manager->flush();
                     return $this->redirectToRoute('App_payer', [], Response::HTTP_SEE_OTHER);

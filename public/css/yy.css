@@ -2,10 +2,6 @@ fieldset{
     display:flex;
     width: 150px;
 }
-
-select{
-    display:none;
-}
 legend{
     display:none;
 }

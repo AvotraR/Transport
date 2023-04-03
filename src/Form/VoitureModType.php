@@ -7,7 +7,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
@@ -20,9 +19,13 @@ class VoitureModType extends AbstractType
                 'entry_type' =>CheckboxType::class, // Le type de chaque élément de la collection
                 'allow_add' => true,
                 'empty_data'=>false,
-                'required'=>false
+                'required'=>false,
             ]) 
-            ->add('id')
+            ->add('id',TextType::class,[
+                'attr'=>[
+                    'class'=>'id_voiture'
+                ]
+            ])
         ;
     }
 

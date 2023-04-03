@@ -53,7 +53,7 @@ class TransportController extends AbstractController
             $formBuilder=$this->createFormBuilder();
             foreach($voitures as $voiture){
                 $voiture = $voitureRep->find($voiture->getId());
-                $formBuilder->add('voiture_'.$voiture->getId(),VoitureModType::class,['data'=>$voiture]);
+                $formBuilder->add('voiture_'.$voiture->getId(),VoitureModType::class,['data'=>$voiture,'attr'=>['class'=>'schema']]);
                 $form = $formBuilder->getForm();
                 $form->handleRequest($request);
                 if($form->isSubmitted() && $form-> isValid()){

@@ -91,12 +91,14 @@
             })
         }
     (function(){
-        const input = document.getElementsByTagName('input');
+        const input = document.getElementsByClassName('id_voiture');
         for(i=0;i<input.length;i++){
-            if(input[i].type === "number"){
                 input[i].parentNode.style.display="none";
-            }
         }
     }())
+    const schema = document.getElementsByClassName('schema');
+    for(i=0;i<schema.length;i++){
+                schema[i].parentNode.classList.add('collection');
+    }
 </script>
 {%endblock%}

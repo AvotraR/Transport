@@ -1,11 +1,18 @@
 fieldset{
     display:flex;
-    width: 150px;
+    width: 120px ;
+    border: 1px solid;
+    background-color: rgb(108, 110, 112);
 }
 legend{
     display:none;
 }
-
+.collection{
+    display:block;
+    width: 600px;
+    padding: 10px;
+    background-color:#343738;
+}
 .check{
     display:block;
     width: 20px;
@@ -13,10 +20,6 @@ legend{
     margin: 8px;
     cursor:pointer;
     z-index: 0;
-}
-label{
-    position:relative;
-    z-index: -1;
 }
 .check:hover{
     
@@ -26,4 +29,9 @@ label{
     display: grid;
     grid-template-columns: auto auto auto;
     justify-content: center;
+}
+.schema{
+    display: flex;
+    justify-content: center;
+    width:100%;
 }

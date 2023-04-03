@@ -39,7 +39,7 @@ class TransportController extends AbstractController
             $paie = true; 
             return $this->redirectToRoute('App_place_voiture', [], Response::HTTP_SEE_OTHER);
         }
-        return $this->render('transport/index.html.twig', [
+        return $this->render('transport/reservation.html.twig', [
             'controller_name' => 'TransportController',
             'formBillet' => $form->createView(),
             'paie'=>$paie,

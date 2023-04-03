@@ -1,0 +1,33 @@
+{% extends 'base.html.twig'%}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{asset('css/reservation.css')}}">
+{% endblock %}
+{% block body %}
+<section class="reservation">
+    <div id="container-billet">
+        <div class="contents">
+            {{form_start(formBillet)}}
+                <div class="row ">
+                    {{form_row(formBillet.Nom)}}
+                    {{form_row(formBillet.Prenom)}}
+                    {{form_row(formBillet.Telephone)}}
+                    {{form_row(formBillet.CIN)}}
+                </div>
+                <div class="row">
+                    {{form_row(formBillet.depart)}}
+                    {{form_row(formBillet.destination)}}
+                    {{form_row(formBillet.categorie)}}
+                </div>
+                <div class="row">
+                    {{form_row(formBillet.DateReservation)}}
+                </div>
+                <div class="row">
+                    <div class="btn-action">
+                        <button type="submit" id="verifie">Verifier</button>
+                    </div>
+                </div>
+                {{form_end(formBillet)}} 
+        </div>
+    </div>
+</section>
+{% endblock %}

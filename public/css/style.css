@@ -2,8 +2,10 @@
     padding:0;
     margin:0;
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-  
+
 }
+
+
 #nav-hero{
     width:100%;
     display: inline-flex;
@@ -79,4 +81,8 @@
 }
 .car-place #prixTotal{
     display: none;
+}
+/* reservation */
+.reservation{
+    display:flex;
 }

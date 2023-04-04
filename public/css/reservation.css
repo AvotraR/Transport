@@ -1,6 +1,6 @@
 #container-billet{
-    display:flex;
-    
+    display:block;
+    width:100%;
 }
 .contents{
     display: block;

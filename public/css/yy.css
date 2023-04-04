@@ -7,6 +7,11 @@ fieldset{
 legend{
     display:none;
 }
+/* section car-reservation */
+#car-resevation{
+    display:block;
+    background-color: rgb(207, 171, 240);
+}
 .collection{
     display:block;
     width: 600px;
@@ -34,4 +39,11 @@ legend{
     display: flex;
     justify-content: center;
     width:100%;
+}
+#prixTotal{
+    display:none;
+}
+.car-type{
+    background-color: aqua;
+    display:block;
 }

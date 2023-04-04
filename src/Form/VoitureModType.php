@@ -21,11 +21,7 @@ class VoitureModType extends AbstractType
                 'empty_data'=>false,
                 'required'=>false,
             ]) 
-            ->add('id',TextType::class,[
-                'attr'=>[
-                    'class'=>'id_voiture'
-                ]
-            ])
+            ->add('id')
         ;
     }
 

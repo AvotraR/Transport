@@ -15,6 +15,12 @@ class VoitureModType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('numero',TextType::class,[
+                'disabled'=>true,
+                'attr'=>[
+                    'class'=>'Numero'
+                ]
+            ])
             ->add('place', CollectionType::class, [
                 'entry_type' =>CheckboxType::class, // Le type de chaque élément de la collection
                 'allow_add' => true,
@@ -22,6 +28,7 @@ class VoitureModType extends AbstractType
                 'required'=>false,
             ]) 
             ->add('id')
+           
         ;
     }
 

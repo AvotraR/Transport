@@ -41,7 +41,7 @@ class BilletType extends AbstractType
             [
                 'label' => 'Date de depart',
                 'widget' => 'single_text',
-                'required' => false,
+                'required' => true,
                 'attr' => [
                     'class' => 'datetime',
                 ],

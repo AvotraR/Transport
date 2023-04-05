@@ -35,7 +35,7 @@ for(i=0;i<check.length;i++){
                 this.style.backgroundColor="rgb(48, 255, 29)";
                 this.style.opacity="0.8";
                 this.firstChild.checked=true;   
-                voiture = this.parentNode.parentNode.parentNode.parentNode.childNodes[1].childNodes[1].value
+                voiture=this.parentNode.parentNode.parentNode.parentNode.childNodes[2].childNodes[1].value
                 array_place.push(this.childNodes[2].innerText);
                 Place_prise.value=(prix.value*j);
                 j++;
@@ -64,4 +64,5 @@ for(i=0;i<check.length;i++){
 const schema = document.getElementsByClassName('schema');
 for(i=0;i<schema.length;i++){
             schema[i].parentNode.classList.add('collection');
+            console.log(schema[i]);
 }

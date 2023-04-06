@@ -8,31 +8,7 @@ legend{
     display:none;
 }
 /* section car-reservation */
-.car-type{
-    background-color: #fff;
-    display:inline-flex;
-    align-items: center;
-    width:100%;
-    margin:0px;
-}
-.car-type h4{
-    font-size: 24px;
-    font-weight:300;
-    color: #313b3d;
-    letter-spacing: 0;
-    margin-right: 20px;
-    margin-left: 20px;
-    font-family: 'Poppins', sans-serif;
-}
-.car-type ul{
-    margin: 10px;
-}
-.car-type ul li{
-    float: left;
-    margin-top: 4px;
-    list-style: none;
-    margin: 10px;
-}
+
 /* car-place-container */
 .car-place-container{
     display:block;

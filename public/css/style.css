@@ -1,11 +1,9 @@
 *{
     padding:0;
     margin:0;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-
+    box-sizing: border-box;
 }
-
-
+/* menu principale*/
 #nav-hero{
     width:100%;
     display: inline-flex;
@@ -27,11 +25,7 @@
    text-decoration: none;
     margin:10px;
 }
-.svg{
-    background-color: rgba(10, 10, 10, 0);
-    position:relative;
-    top:-50px;
-}
+/* page principale */
 .head{
     width:100%;
     height:90vh;
@@ -55,34 +49,91 @@
     height:100%;
     padding: 20px;
 }
-.title h1{
+.container .title h1{
     font-size: 3.5rem;
     text-shadow: 2px 2px 2px #333;
     margin:20px;
 }
-.title p{
+.container .title p{
     line-height: 1.9;
     font-size: 1.2rem;
 }
-.card{
-    display:inline-flex;
-    width:50%;
-    justify-content: center;
-    padding: 10px;
-}
-.myCard{
-    border:2px solid;
-    border-radius: 20px;
-    height: 200px;
-}
-.myCard .card-head img{
-    width:100%;
 
+.svg{
+    background-color: rgba(10, 10, 10, 0);
+    position:relative;
+    top:-50px;
 }
-.car-place #prixTotal{
-    display: none;
+/* all title-head of pages */
+.title-head{
+    background-color: #fff;
+    display:inline-flex;
+    align-items: center;
+    width:100%;
+    height: 80px;
+    margin:0px;
 }
-/* reservation */
+.title-head h4{
+    font-size: 24px;
+    font-weight:300;
+    color: #313b3d;
+    letter-spacing: 0;
+    margin-right: 20px;
+    margin-left: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+.title-head ul{
+    margin: 10px;
+}
+.title-head ul li{
+    float: left;
+    margin-top: 4px;
+    list-style: none;
+    margin: 10px;
+}
+/* page reservation */
 .reservation{
-    display:flex;
+    display:block;
 }
+#container-billet{
+    display:block;
+    width:100%;
+}
+#container-billet .contents{
+    display: block;
+    background-color: #f3f8fb;
+    width:100%;
+    padding:12px;
+    font-weight: 500;
+    color: #666;
+}
+.contents .row{
+    display:flex;
+    flex-direction: column;
+    background-color: #fff;
+    margin:20px;
+    padding: 1.6rem;
+    border: 1px solid #fff;
+    border-radius: 0.5rem;
+}
+.contents .row select{
+    width:100%;
+    background-color: #fff;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.contents .row label{
+    font-weight: 500;
+    color: #666;
+}
+
+.contents .row #verifie{
+    width: 100px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    background-color: rgb(236, 134, 134);
+}
+

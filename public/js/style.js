@@ -40,6 +40,9 @@ for(i=0;i<check.length;i++){
                 Place_prise.value=(prix.value*j);
                 j++;
                 id_voiture.value=voiture
+                if(!id_voiture.value){
+                    alert("bobo")
+                }
             }else{
                 this.style.backgroundColor="";
                 this.firstChild.checked=false;
@@ -64,5 +67,19 @@ for(i=0;i<check.length;i++){
 const schema = document.getElementsByClassName('schema');
 for(i=0;i<schema.length;i++){
             schema[i].parentNode.classList.add('collection');
-            console.log(schema[i]);
 }
+(function(){
+    const conteneur = document.getElementsByClassName('conteneur');
+    for(i=0;i<conteneur.length;i++){
+            c=0
+            count = conteneur[i].children.length;
+            for(k=0;k<count;k++){
+                if(!conteneur[i].children[k].style.backgroundColor){
+                    c++;
+                }
+            }
+            newP = document.createElement('p')
+            newP.innerText="Place libre "+c
+            conteneur[i].parentElement.parentElement.appendChild(newP)
+    }
+}())

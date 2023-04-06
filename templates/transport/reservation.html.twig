@@ -1,9 +1,9 @@
 {% extends 'base.html.twig'%}
-{% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{asset('css/reservation.css')}}">
-{% endblock %}
 {% block body %}
 <section class="reservation">
+    <div class="title-head">
+        <h4>Reservation</h4>
+    </div>
     <div id="container-billet">
         <div class="contents">
             {{form_start(formBillet)}}

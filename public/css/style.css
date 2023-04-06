@@ -99,20 +99,29 @@
     display:block;
     width:100%;
 }
+
 #container-billet .contents{
-    display: block;
+    display: flex;
     background-color: #f3f8fb;
     width:100%;
     padding:12px;
     font-weight: 500;
     color: #666;
 }
+.contents .imgContent{
+    display: block;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    background-image: url('/img/res.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 .contents .row{
     display:flex;
-    flex-direction: column;
     background-color: #fff;
-    margin:20px;
-    padding: 1.6rem;
+    margin:8px;
+    padding:0.25em;
     border: 1px solid #fff;
     border-radius: 0.5rem;
 }
@@ -136,4 +145,37 @@
     border-radius: 0.25rem;
     background-color: rgb(236, 134, 134);
 }
+@media only screen and (max-width: 850px){
+    .contents .imgContent{
+        display:none;
+    }
+    .contents.mainContent{
+        width:100%;
+    }
 
+
+}
+/* payment partie */
+.paymentBuilder{
+    display:flex;
+    width:100%;
+    justify-content: center;
+    background-color: #f3f8fb;
+}
+.paymentBuilder .paymentContainer{
+    display: flex;
+    width: 600px;
+    margin: 10px;
+    padding:0.25em;
+    border: 1px solid #fff;
+    border-radius: 0.5rem;
+    background-color: #fff;
+}
+.paymentContainer .decoContent{
+    margin:0px;
+    padding:0px;
+    background-image: url('/img/res.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}

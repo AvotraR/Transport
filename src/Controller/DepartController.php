@@ -10,13 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/depart')]
+#[Route('/Admin/depart')]
 class DepartController extends AbstractController
 {
     #[Route('/', name: 'app_depart_index', methods: ['GET'])]
     public function index(DepartRepository $departRepository): Response
     {
-        return $this->render('depart/index.html.twig', [
+        return $this->render('/admin/depart/index.html.twig', [
             'departs' => $departRepository->findAll(),
         ]);
     }
@@ -34,7 +34,7 @@ class DepartController extends AbstractController
             return $this->redirectToRoute('app_depart_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('depart/new.html.twig', [
+        return $this->renderForm('/admin/depart/new.html.twig', [
             'depart' => $depart,
             'form' => $form,
         ]);
@@ -43,7 +43,7 @@ class DepartController extends AbstractController
     #[Route('/{id}', name: 'app_depart_show', methods: ['GET'])]
     public function show(Depart $depart): Response
     {
-        return $this->render('depart/show.html.twig', [
+        return $this->render('/admin/depart/show.html.twig', [
             'depart' => $depart,
         ]);
     }
@@ -60,7 +60,7 @@ class DepartController extends AbstractController
             return $this->redirectToRoute('app_depart_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('depart/edit.html.twig', [
+        return $this->renderForm('/admin/depart/edit.html.twig', [
             'depart' => $depart,
             'form' => $form,
         ]);

@@ -37,6 +37,7 @@ class TransportController extends AbstractController
             $session->get("voiture", []);  
             $dataVoiture = $session->set("voiture",$voiture); 
             $paie = true; 
+            
             return $this->redirectToRoute('App_place_voiture', [], Response::HTTP_SEE_OTHER);
         }
         return $this->render('transport/reservation.html.twig', [

@@ -10,13 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/prix')]
+#[Route('/Admin/prix')]
 class PrixController extends AbstractController
 {
     #[Route('/', name: 'app_prix_index', methods: ['GET'])]
     public function index(PrixRepository $prixRepository): Response
     {
-        return $this->render('prix/index.html.twig', [
+        return $this->render('/admin/prix/index.html.twig', [
             'prixes' => $prixRepository->findAll(),
         ]);
     }
@@ -34,7 +34,7 @@ class PrixController extends AbstractController
             return $this->redirectToRoute('app_prix_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('prix/new.html.twig', [
+        return $this->renderForm('/admin/prix/new.html.twig', [
             'prix' => $prix,
             'form' => $form,
         ]);
@@ -43,7 +43,7 @@ class PrixController extends AbstractController
     #[Route('/{id}', name: 'app_prix_show', methods: ['GET'])]
     public function show(Prix $prix): Response
     {
-        return $this->render('prix/show.html.twig', [
+        return $this->render('/admin/prix/show.html.twig', [
             'prix' => $prix,
         ]);
     }
@@ -60,7 +60,7 @@ class PrixController extends AbstractController
             return $this->redirectToRoute('app_prix_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('prix/edit.html.twig', [
+        return $this->renderForm('/admin/prix/edit.html.twig', [
             'prix' => $prix,
             'form' => $form,
         ]);

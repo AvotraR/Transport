@@ -10,13 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/voiture')]
+#[Route('/Admin/voiture')]
 class VoitureController extends AbstractController
 {
     #[Route('/', name: 'app_voiture_index', methods: ['GET'])]
     public function index(VoitureRepository $voitureRepository): Response
     {
-        return $this->render('voiture/index.html.twig', [
+        return $this->render('/admin/voiture/index.html.twig', [
             'voitures' => $voitureRepository->findAll(),
         ]);
     }
@@ -41,7 +41,7 @@ class VoitureController extends AbstractController
             return $this->redirectToRoute('app_voiture_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('voiture/new.html.twig', [
+        return $this->renderForm('/admin/voiture/new.html.twig', [
             'voiture' => $voiture,
             'form' => $form,
         ]);
@@ -50,7 +50,7 @@ class VoitureController extends AbstractController
     #[Route('/{id}', name: 'app_voiture_show', methods: ['GET'])]
     public function show(Voiture $voiture): Response
     {
-        return $this->render('voiture/show.html.twig', [
+        return $this->render('/admin/voiture/show.html.twig', [
             'voiture' => $voiture,
         ]);
     }
@@ -67,7 +67,7 @@ class VoitureController extends AbstractController
             return $this->redirectToRoute('app_voiture_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('voiture/edit.html.twig', [
+        return $this->renderForm('/admin/voiture/edit.html.twig', [
             'voiture' => $voiture,
             'form' => $form,
         ]);

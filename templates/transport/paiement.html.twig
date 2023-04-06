@@ -1,34 +1,34 @@
 {% extends 'base.html.twig' %}
-{%block stylesheets%}
-<link rel="stylesheet" type="text/css" href="{{asset('css/paiement.css')}}">
-{%endblock%}
 {% block body %}
-<div class="container-fact">
-    <div class="builder">
-        <div class="block-l">
-            <p>Nom :{{billet.Nom}}</p>
-            <p>Prenom {{billet.Prenom}}</p>
-            <p>CIN :{{billet.CIN}}</p>
-            <p>Depart :{{billet.depart.ville}}</p>
-            <p>Destination :{{billet.destination.ville}}</p>
-            <p>Categorie :{{billet.categorie.categorie}}</p>
-            <p>Date de depart :{{billet.DateReservation|date('d/m/y')}}</p>
-            <p>Voiture  :{{billet.Voiture.numero}}</p>
-            <p>Place :{{billet.place}}</p>
-            <p>---------------------------------</p>
-            <p>Prix total :{{billet.prix}}</p>
-            <button>Payer</button>
-        </div>
-        <div class="block-r">
-            <h1>Mode de paiement</h1>
-            <div class="logo">
-                <img src="{{asset('img/2.jpg')}}" alt="">
-                <img src="{{asset('img/2.jpg')}}" alt="">
-                <img src="{{asset('img/2.jpg')}}" alt="">
+<section class="sectionPayment">
+    <div class="title-head">
+        <h4>Paiement</h4>
+    </div>
+    <div class="paymentBuilder">
+        <div class="paymentContainer">
+            <div class="infoContent col-md-6">
+                <p>Nom :{{billet.Nom}}</p>
+                <p>Prenom {{billet.Prenom}}</p>
+                <p>CIN :{{billet.CIN}}</p>
+                <p>Depart :{{billet.depart.ville}}</p>
+                <p>Destination :{{billet.destination.ville}}</p>
+                <p>Categorie :{{billet.categorie.categorie}}</p>
+                <p>Date de depart :{{billet.DateReservation|date('d/m/y')}}</p>
+                <p>Voiture  :{{billet.Voiture.numero}}</p>
+                <p>Place :{{billet.place}}</p>
+                <p>---------------------------------</p>
+                <p>Prix total :{{billet.prix}}</p>
+                <button>Payer</button>
+            </div>
+            <div class="decoContent col-md-6">
+                <svg width="250" height="100%">  
+                    <path id="style"  d="M0 0 L150 0 L0 500" stroke="white" fill="white"/>
+                </svg>
             </div>
         </div>
     </div>
-</div>
+</section>
+          
 
 
 {% endblock %}

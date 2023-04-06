@@ -6,27 +6,48 @@
     </div>
     <div id="container-billet">
         <div class="contents">
-            {{form_start(formBillet)}}
+            <div class="imgContent col-md-6">
+                <H1>COUCOU</H1>
+            </div>
+            <div class="main-content col-md-6">
+                {{form_start(formBillet)}}
                 <div class="row ">
-                    {{form_row(formBillet.Nom)}}
-                    {{form_row(formBillet.Prenom)}}
-                    {{form_row(formBillet.Telephone)}}
-                    {{form_row(formBillet.CIN)}}
+                    <div class="form-group col-md-6">
+                        {{form_row(formBillet.Nom)}}
+                    </div>
+                    <div class="form-group col-md-6">
+                        {{form_row(formBillet.Prenom)}}
+                    </div>
+                    <div class="form-group col-md-12">
+                        {{form_row(formBillet.Telephone)}}
+                    </div>
+                    <div class="form-group col-md-12">
+                        {{form_row(formBillet.CIN)}}
+                    </div>
                 </div>
                 <div class="row">
-                    {{form_row(formBillet.depart)}}
-                    {{form_row(formBillet.destination)}}
-                    {{form_row(formBillet.categorie)}}
+                    <div class="col-md-4">
+                        {{form_row(formBillet.depart)}}
+                    </div>
+                    <div class="col-md-4">
+                        {{form_row(formBillet.destination)}}
+                    </div>
+                    <div class="col-md-4">
+                        {{form_row(formBillet.categorie)}}
+                    </div>
                 </div>
                 <div class="row">
-                    {{form_row(formBillet.DateReservation)}}
+                    <div class="col-md-12">
+                        {{form_row(formBillet.DateReservation)}}
+                    </div>
                 </div>
                 <div class="row">
                     <div class="btn-action">
                         <button type="submit" id="verifie">Verifier</button>
                     </div>
                 </div>
-                {{form_end(formBillet)}} 
+                {{form_end(formBillet)}}
+            </div> 
         </div>
     </div>
 </section>

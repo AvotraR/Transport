@@ -10,13 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/destination')]
+#[Route('/Admin/destination')]
 class DestinationController extends AbstractController
 {
     #[Route('/', name: 'app_destination_index', methods: ['GET'])]
     public function index(DestinationRepository $destinationRepository): Response
     {
-        return $this->render('destination/index.html.twig', [
+        return $this->render('/admin/destination/index.html.twig', [
             'destinations' => $destinationRepository->findAll(),
         ]);
     }
@@ -34,7 +34,7 @@ class DestinationController extends AbstractController
             return $this->redirectToRoute('app_destination_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('destination/new.html.twig', [
+        return $this->renderForm('/admin/destination/new.html.twig', [
             'destination' => $destination,
             'form' => $form,
         ]);
@@ -43,7 +43,7 @@ class DestinationController extends AbstractController
     #[Route('/{id}', name: 'app_destination_show', methods: ['GET'])]
     public function show(Destination $destination): Response
     {
-        return $this->render('destination/show.html.twig', [
+        return $this->render('/admin/destination/show.html.twig', [
             'destination' => $destination,
         ]);
     }
@@ -60,7 +60,7 @@ class DestinationController extends AbstractController
             return $this->redirectToRoute('app_destination_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('destination/edit.html.twig', [
+        return $this->renderForm('/admin/destination/edit.html.twig', [
             'destination' => $destination,
             'form' => $form,
         ]);

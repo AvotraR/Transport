@@ -14,6 +14,11 @@
         {% endblock %}
     </head>
     <body>
+    {% block loader %}
+        <div id="loader">
+            <div class="spinner"></div>
+        </div>
+    {% endblock %}
         <nav id="nav-hero">
             <ul>
                 <li><a href="{{path('App_home')}}">Acceuil</a></li>
@@ -27,5 +32,13 @@
         {%endblock%}
         {% block body %}
         {% endblock %}
+    <script>
+        window.addEventListener('load', function load() {
+            const loader = document.getElementById('loader');
+            setTimeout(function () {
+                loader.classList.add('fadeOut');
+            }, 300);
+        });
+    </script>
     </body>
 </html>

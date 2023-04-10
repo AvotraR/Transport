@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class TransportController extends AbstractController
 {
@@ -36,9 +37,11 @@ class TransportController extends AbstractController
             $dataBillet = $session->set("billet",$facture); 
             $session->get("voiture", []);  
             $dataVoiture = $session->set("voiture",$voiture); 
-            $paie = true; 
-            
-            return $this->redirectToRoute('App_place_voiture', [], Response::HTTP_SEE_OTHER);
+            if($prix==null){
+                $this->addFlash('danger','Desolez nous n\'avons pas des iteneraire pour cette destination');
+            }else{    
+                return $this->redirectToRoute('App_place_voiture', [], Response::HTTP_SEE_OTHER);
+            }
         }
         return $this->render('transport/reservation.html.twig', [
             'controller_name' => 'TransportController',
@@ -52,23 +55,28 @@ class TransportController extends AbstractController
             $voitures = $session->get("voiture");
             $billet = $session->get("billet");
             $formBuilder=$this->createFormBuilder();
+            
             foreach($voitures as $voiture){
                 $voiture = $voitureRep->find($voiture->getId());
                 $formBuilder->add('voiture_'.$voiture->getId(),VoitureModType::class,['data'=>$voiture,'attr'=>['class'=>'schema']]);
                 $form = $formBuilder->getForm();
                 $form->handleRequest($request);
+
                 if($form->isSubmitted() && $form-> isValid()){
                     $voitureModifier = $form->get('voiture_'.$voiture->getId())->getData();
                     $voiture->setPlace($voitureModifier->getPlace());
                     $id=$voitureRep->find($request->request->get('id_voiture'));
-                    //id du voiture selectionner
-                    $billet->setPrix($request->request->get('prix'));
                     $billet->setVoiture($id);
                     $billet->setPlace($request->request->get('place_total'));
-                    //on persist
-                    $manager->persist($voiture);
-                    $manager->flush();
-                    return $this->redirectToRoute('App_payer', [], Response::HTTP_SEE_OTHER);
+                    if($request->request->get('prix')==0){
+                        $this->addFlash('danger','Vous ne ouvez pas faire un paiement parceque vous n\'avez pas encore pris une place.');
+                    }else{
+                        $billet->setPrix($request->request->get('prix'));    
+                        $manager->persist($voiture);
+                        $manager->flush();
+                        return $this->redirectToRoute('App_payer', [], Response::HTTP_SEE_OTHER);
+                    }
+                    
                 }
             }
             return $this->render('transport/editer.html.twig', [
@@ -79,8 +87,10 @@ class TransportController extends AbstractController
             ]);   
     }
     #[Route('/billet/paiement', name:'App_payer')]
-    public function payer(SessionInterface $session){
+    public function payer(SessionInterface $session ,SerializerInterface $serialize){
+        $this->addFlash('success','Votre reservation a été préenregistrer il reste juste le paiement');
         $facture = $session->get("billet");
+        
         return $this->render('transport/paiement.html.twig',[
             'billet'=>$facture,
             'controller_name'=>'TransportController']);

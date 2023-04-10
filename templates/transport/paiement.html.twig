@@ -3,6 +3,13 @@
 <section class="sectionPayment">
     <div class="title-head">
         <h4>Paiement</h4>
+        {% for type , messages in app.flashes%}
+            {%for message in messages%}
+                <div class="alert alert-{{type}}">
+                    {{message}}
+                </div>
+            {% endfor%}
+        {%endfor%}
     </div>
     <div class="paymentBuilder">
         <div class="paymentContainer">

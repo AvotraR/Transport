@@ -8,7 +8,18 @@ legend{
     display:none;
 }
 /* section car-reservation */
-
+@keyframes example {
+    from {background-color: red;}
+    to {background-color: yellow;}
+  }
+#btn-model{
+    display: none;
+    border: 1px solid;
+    border-radius: 20px;
+    animation-name: example;
+    animation-duration: 2s;
+    animation-iteration-count: 6;
+}
 /* car-place-container */
 .car-place-container{
     display:block;
@@ -102,11 +113,6 @@ legend{
     line-height: 26px;
     margin:10px;
 }
-
-
-
-
-
 
 @media only screen and (max-width: 850px) {
     .car-place form{

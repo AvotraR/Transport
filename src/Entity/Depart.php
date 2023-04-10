@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\DepartRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\DepartRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: DepartRepository::class)]
 class Depart
@@ -16,6 +17,7 @@ class Depart
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("post:read")]
     private ?string $ville = null;
 
     #[ORM\OneToMany(mappedBy: 'depart', targetEntity: Prix::class)]

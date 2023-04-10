@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\BilletRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: BilletRepository::class)]
 class Billet
@@ -12,39 +13,51 @@ class Billet
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column()]
+    #[Groups("post:read")]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'billets')]
+    #[Groups("post:read")]
     private ?Destination $destination = null;
 
     #[ORM\ManyToOne(inversedBy: 'billets')]
+    #[Groups("post:read")]
     private ?Categorie $categorie = null;
 
     #[ORM\ManyToOne(inversedBy: 'billets')]
+    #[Groups("post:read")]
     private ?Depart $depart = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups("post:read")]
     private ?\DateTimeInterface $DateReservation = null;
 
     #[ORM\Column(length: 20)]
+    #[Groups("post:read")]
     private ?string $Nom = null;
 
     #[ORM\Column(length: 20)]
+    #[Groups("post:read")]
     private ?string $Prenom = null;
 
     #[ORM\Column]
+    #[Groups("post:read")]
     private ?int $Telephone = null;
 
     #[ORM\Column]
+    #[Groups("post:read")]
     private ?int $CIN = null;
 
     #[ORM\Column]
+    #[Groups("post:read")]
     private ?int $prix = null;
 
     #[ORM\ManyToOne(inversedBy: 'billets')]
+    #[Groups("post:read")]
     private ?voiture $voiture = null;
 
     #[ORM\Column(length: 20)]
+    #[Groups("post:read")]
     private ?string $place = null;
 
 

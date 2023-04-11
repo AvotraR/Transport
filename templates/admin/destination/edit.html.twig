@@ -1,11 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/_base.html.twig' %}
 
 {% block title %}Edit Destination{% endblock %}
 
 {% block body %}
     <h1>Edit Destination</h1>
 
-    {{ include('destination/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('admin/destination/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('app_destination_index') }}">back to list</a>
 

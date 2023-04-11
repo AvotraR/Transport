@@ -15,7 +15,7 @@ legend{
 #btn-model{
     display: none;
     border: 1px solid;
-    border-radius: 20px;
+    border-radius: 150px 20px;
     animation-name: example;
     animation-duration: 2s;
     animation-iteration-count: 6;

@@ -64,8 +64,8 @@ class TransportController extends AbstractController
 
                 if($form->isSubmitted() && $form-> isValid()){
                     $voitureModifier = $form->get('voiture_'.$voiture->getId())->getData();
-                    $voiture->setPlace($voitureModifier->getPlace());
                     $id=$voitureRep->find($request->request->get('id_voiture'));
+                    $voiture->setPlace($voitureModifier->getPlace());
                     $billet->setVoiture($id);
                     $billet->setPlace($request->request->get('place_total'));
                     if($request->request->get('prix')==0){
@@ -87,7 +87,7 @@ class TransportController extends AbstractController
             ]);   
     }
     #[Route('/billet/paiement', name:'App_payer')]
-    public function payer(SessionInterface $session ,SerializerInterface $serialize){
+    public function payer(SessionInterface $session){
         $this->addFlash('success','Votre reservation a été préenregistrer il reste juste le paiement');
         $facture = $session->get("billet");
         

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/_base.html.twig' %}
 
 {% block title %}Prix index{% endblock %}
 
@@ -9,6 +9,8 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Depart</th>
+                <th>Destination</th>
                 <th>Prix</th>
                 <th>actions</th>
             </tr>
@@ -17,6 +19,9 @@
         {% for prix in prixes %}
             <tr>
                 <td>{{ prix.id }}</td>
+                <td>{{ prix.depart.ville }}</td>
+                <td>{{ prix.destination.ville }}</td>
+                <td>{{ prix.categorie.categorie }}</td>
                 <td>{{ prix.prix }}</td>
                 <td>
                     <a href="{{ path('app_prix_show', {'id': prix.id}) }}">show</a>

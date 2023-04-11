@@ -63,6 +63,12 @@ class VoitureController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $Nbplace = $voiture->getNbPlace();
+            for($i=0;$i<=$Nbplace;$i++){
+                $place[0]=true;
+                $place[$i]=false;
+            } 
+            $voiture->setPlace($place);
             $voitureRepository->add($voiture, true);
             return $this->redirectToRoute('app_voiture_index', [], Response::HTTP_SEE_OTHER);
         }

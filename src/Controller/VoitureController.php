@@ -36,8 +36,6 @@ class VoitureController extends AbstractController
             } 
             $voiture->setPlace($place);
             $voitureRepository->add($voiture, true);
-
-
             return $this->redirectToRoute('app_voiture_index', [], Response::HTTP_SEE_OTHER);
         }
 

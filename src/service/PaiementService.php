@@ -1,16 +1,16 @@
 <?php
 namespace App\service;
 use App\Entity\Billet;
+use DateTime;
 
 Class PaiementService{
 
-    public function payer($data,$prix){
-        $billet = new Billet();
-        $billet=$data;
+    public function prix($data,$prix){
+        $date = new DateTime();
           foreach($prix as $p){
-            $billet->setPrix((($p->getPrix())));
+            $data->setPrix((($p->getPrix())));
           }
-        return $billet;
+        return $data;
         
-    }   
+    }  
 }

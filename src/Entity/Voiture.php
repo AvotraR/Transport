@@ -86,6 +86,7 @@ class Voiture
     public function getPlace(): ?array
     {
         return $this->place;
+        
     }
 
     public function setPlace(?array $place): void
@@ -130,7 +131,12 @@ class Voiture
 
     public function setNbPlace(int $NbPlace): self
     {
-        $this->NbPlace = $NbPlace;
+        $this->NbPlace = $NbPlace;   
+        for($i=0;$i<=$NbPlace;$i++){
+            $place[0]=true;
+            $place[$i]=false;
+        } 
+        $this->setPlace($place);
 
         return $this;
     }

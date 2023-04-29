@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Depart;
+use App\Entity\Voiture;
 use App\Entity\Categorie;
 use App\Entity\Destination;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,6 +48,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Categorie', 'fa fa-home' , Categorie::class);
         yield MenuItem::linkToCrud('Depart', 'fa fa-home' , Depart::class);
         yield MenuItem::linkToCrud('Destination', 'fa fa-home' , Destination::class);
+        yield MenuItem::linkToCrud('Voiture', 'fa fa-home' , Voiture::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

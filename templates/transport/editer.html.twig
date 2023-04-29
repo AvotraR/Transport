@@ -144,7 +144,8 @@
             }
         }())
             const model = document.getElementById('model')
-            btn_model.addEventListener('click',function(){
+            btn_model.addEventListener('click',function(event){
+                event.preventDefault();
                 model.style.display="block";
             })
             window.onclick = function(event) {

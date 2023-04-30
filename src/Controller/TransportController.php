@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Billet;
 use App\Form\BilletType;
 use App\Form\VoitureModType;
+use App\Repository\BilletRepository;
 use App\service\PaiementService;
 use App\Repository\PrixRepository;
 use App\Repository\VoitureRepository;
@@ -33,7 +34,7 @@ class TransportController extends AbstractController
             $session->set("billet",$facture); 
             $session->set("voiture",$voiture); 
             if($prix==null){
-                $this->addFlash('danger','Desolez nous n\'avons pas des iteneraire pour cette destination');
+                $this->addFlash('danger','Desolez nous n\'avons pas des voitures pour cette destination');
             }else{    
                 return $this->redirectToRoute('App_place_voiture', [], Response::HTTP_SEE_OTHER);
             }
@@ -48,6 +49,7 @@ class TransportController extends AbstractController
     public function place(VoitureRepository $voitureRep,SessionInterface $session,Request $request,EntityManagerInterface $manager){
             $voitures = $session->get("voiture");
             $billet = $session->get("billet");
+
             $formBuilder=$this->createFormBuilder();
             
             foreach($voitures as $voiture){
@@ -62,9 +64,13 @@ class TransportController extends AbstractController
                 if($form->isSubmitted() && $form-> isValid()){
                     $voitureModifier = $form->get('voiture_'.$voiture->getId())->getData();
                     //on cherche la voiture correspondant a $id qui vient de request
-                    $id=$voitureRep->find($request->request->get('id_voiture'));
-                    $billet->setVoiture($id);
-                    //on modifie place avec les valeurs recu dans vue
+                    
+                    $id=explode(',',$request->request->get('id_voiture'));
+                    foreach($id as $i){
+                        $voiture_id=$voitureRep->find($i);
+                        $billet->addVoiture($voiture_id);
+                    }
+                    //on modifie place avec les valeurs recu dans la template
                     $voiture->setPlace($voitureModifier->getPlace());
                     $billet->setPlace($request->request->get('place_total'));
                     //on met un condition que si prix=0 on lance une message sinon on persist
@@ -87,10 +93,10 @@ class TransportController extends AbstractController
             ]);   
     }
     #[Route('/billet/paiement', name:'App_payer')]
-    public function payer(SessionInterface $session){
+    public function payer(SessionInterface $session,BilletRepository $billetRepo, EntityManagerInterface $manager){
         $this->addFlash('success','Votre reservation a été préenregistrer il reste juste le paiement');
         $facture = $session->get("billet");
-        
+        $billetRepo->add($facture,true);
         return $this->render('transport/paiement.html.twig',[
             'billet'=>$facture,
             'controller_name'=>'TransportController']);

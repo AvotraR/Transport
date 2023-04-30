@@ -2,9 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\BilletRepository;
+use App\Entity\Destination;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\BilletRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: BilletRepository::class)]
@@ -16,15 +19,15 @@ class Billet
     #[Groups("post:read")]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'billets')]
+    #[ORM\ManyToOne(inversedBy: 'billets',cascade:["persist"])]
     #[Groups("post:read")]
     private ?Destination $destination = null;
 
-    #[ORM\ManyToOne(inversedBy: 'billets')]
+    #[ORM\ManyToOne(inversedBy: 'billets',cascade:["persist"])]
     #[Groups("post:read")]
     private ?Categorie $categorie = null;
 
-    #[ORM\ManyToOne(inversedBy: 'billets')]
+    #[ORM\ManyToOne(inversedBy: 'billets',cascade:["persist"])]
     #[Groups("post:read")]
     private ?Depart $depart = null;
 
@@ -52,14 +55,17 @@ class Billet
     #[Groups("post:read")]
     private ?int $prix = null;
 
-    #[ORM\ManyToOne(inversedBy: 'billets')]
-    #[Groups("post:read")]
-    private ?voiture $voiture = null;
-
     #[ORM\Column(length: 20)]
     #[Groups("post:read")]
     private ?string $place = null;
 
+    #[ORM\ManyToMany(targetEntity: Voiture::class, inversedBy: 'billets',cascade:["persist"])]
+    private Collection $voitures;
+
+    public function __construct()
+    {
+        $this->voitures = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -174,18 +180,6 @@ class Billet
         return $this;
     }
 
-    public function getVoiture(): ?voiture
-    {
-        return $this->voiture;
-    }
-
-    public function setVoiture(?voiture $voiture): self
-    {
-        $this->voiture = $voiture;
-
-        return $this;
-    }
-
     public function getPlace(): ?string
     {
         return $this->place;
@@ -197,4 +191,29 @@ class Billet
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Voiture>
+     */
+    public function getVoitures(): Collection
+    {
+        return $this->voitures;
+    }
+
+    public function addVoiture(Voiture $voiture): self
+    {
+        if (!$this->voitures->contains($voiture)) {
+            $this->voitures[] = $voiture;
+        }
+
+        return $this;
+    }
+
+    public function removeVoiture(Voiture $voiture): self
+    {
+        $this->voitures->removeElement($voiture);
+
+        return $this;
+    }
+
 }

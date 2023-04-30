@@ -30,17 +30,22 @@ class Voiture
     #[ORM\Column(type: Types::ARRAY, nullable: true)]
     private array $place = [];
 
-    #[ORM\OneToMany(mappedBy: 'voiture', targetEntity: Billet::class)]
-    private Collection $billets;
-
     #[ORM\Column]
     private ?int $NbPlace = null;
+
+    #[ORM\Column]
+    private ?bool $isArrived = null;
+
+    #[ORM\ManyToMany(targetEntity: Billet::class, mappedBy: 'voitures')]
+    private Collection $billets;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $Heure = null;
 
     public function __construct()
     {
         $this->billets = new ArrayCollection();
     }
-
    
     public function getId(): ?int
     {
@@ -94,35 +99,6 @@ class Voiture
         $this->place = $place;
     }
 
-    /**
-     * @return Collection<int, Billet>
-     */
-    public function getBillets(): Collection
-    {
-        return $this->billets;
-    }
-
-    public function addBillet(Billet $billet): self
-    {
-        if (!$this->billets->contains($billet)) {
-            $this->billets[] = $billet;
-            $billet->setVoiture($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBillet(Billet $billet): self
-    {
-        if ($this->billets->removeElement($billet)) {
-            // set the owning side to null (unless already changed)
-            if ($billet->getVoiture() === $this) {
-                $billet->setVoiture(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getNbPlace(): ?int
     {
@@ -141,4 +117,64 @@ class Voiture
         return $this;
     }
 
+    public function isIsArrived(): ?bool
+    {
+        return $this->isArrived;
+    }
+
+    public function setIsArrived(bool $isArrived): self
+    {
+        $this->isArrived = $isArrived;
+        if($isArrived == true){
+            $place = $this->getPlace();
+            for($i=0;$i<=$this->getNbPlace();$i++){
+                $place[0]=true;
+                $place[$i]=false;
+            }
+            $this->setPlace($place);
+        }
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Billet>
+     */
+    public function getBillets(): Collection
+    {
+        return $this->billets;
+    }
+
+    public function addBillet(Billet $billet): self
+    {
+        if (!$this->billets->contains($billet)) {
+            $this->billets[] = $billet;
+            $billet->addVoiture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBillet(Billet $billet): self
+    {
+        if ($this->billets->removeElement($billet)) {
+            $billet->removeVoiture($this);
+        }
+
+        return $this;
+    }
+
+    public function getHeure(): ?\DateTimeInterface
+    {
+        return $this->Heure;
+    }
+
+    public function setHeure(\DateTimeInterface $Heure): self
+    {
+        $this->Heure = $Heure;
+
+        return $this;
+    }
+
+
+    
 }

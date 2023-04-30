@@ -10,18 +10,18 @@
             <li>{{voitures.destination.ville}}</li>
             <li>{{voitures.categorie.categorie}}</li>
         </ul> 
-        {% for type , messages in app.flashes%}
-            {%for message in messages%}
-                <div class="alert alert-{{type}}">
-                    {{message}}
-                </div>
-            {% endfor%}
-        {%endfor%}
     </div>
     <div class="car-place-container">
         <div class="car-place">
-             
+            {% for type , messages in app.flashes%}
+                {%for message in messages%}
+                    <div class="alert alert-{{type}}">
+                        {{message}}
+                    </div>
+                {% endfor%}
+            {%endfor%}
             {{form_start(form)}}
+               
                 <div class="grid-item">
                     <div id="prixTotal">
                         <button  id="btn-model" class="btn btn-success">info</button>
@@ -34,7 +34,7 @@
                             </div>
                         </div>
                         <label for="Place_prise" class="label-prise">Prix a payer(Ariary):</label>
-                        <input type="hidden" id="prix" value="{{billet.prix}}">
+                        <input type="hidden" id="prix" value="{{recherche.prix}}">
                         <input type="text" id="Place_prise" name="prix" value=""  readonly>
                         <input type="hidden" id="id_prise" name="id_voiture" value="">
                         <input type="hidden" id="place_total" name="place_total" value="">
@@ -87,6 +87,7 @@
         const id_voiture = document.getElementById("id_prise");
         const place_total = document.getElementById("place_total");
         const array_place = [];
+        const array_voiture = [];
         const btn_model = document.getElementById('btn-model')
         const btn = document.getElementById("btn")
         for(i=0;i<check.length;i++){
@@ -98,11 +99,11 @@
                         this.style.opacity="0.8";
                         this.firstChild.checked=true;   
                         voiture=this.parentNode.parentNode.parentNode.parentNode.childNodes[2].childNodes[1].value
-                        array_place.push(this.childNodes[2].innerText);
+                        array_place.push("Place n°:"+this.childNodes[2].innerText+"dans le voiture n°:"+voiture);
                         btn_model.style.display="block";
                         Place_prise.value=(prix.value*j);
                         j++;
-                        id_voiture.value=voiture
+                        array_voiture.push(voiture)
                     }else{
                         this.style.backgroundColor="";
                         this.firstChild.checked=false;
@@ -111,8 +112,10 @@
                         j--;
                         Place_prise.placeholder-=this.lastChild.textContent;
                         array_place.pop();
+                        array_voiture.pop(voiture)
                     }
-                    place_total.value=array_place;
+                    place_total.value=array_place
+                    id_voiture.value=array_voiture
                     
                 })
             }

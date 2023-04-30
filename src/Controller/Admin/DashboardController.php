@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Billet;
 use App\Entity\Depart;
 use App\Entity\Voiture;
 use App\Entity\Categorie;
@@ -49,6 +50,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Depart', 'fa fa-flag' , Depart::class);
         yield MenuItem::linkToCrud('Destination', 'fa fa-flag-checkered' , Destination::class);
         yield MenuItem::linkToCrud('Voiture', 'fa fa-car' , Voiture::class);
+        yield MenuItem::linkToCrud('Billet', 'fa fa-flag-checkered' , Billet::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

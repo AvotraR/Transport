@@ -77,7 +77,8 @@ class TransportController extends AbstractController
                     if($request->request->get('prix')==0){
                         $this->addFlash('danger','Vous ne ouvez pas faire un paiement parceque vous n\'avez pas encore pris une place.');
                     }else{
-                        $billet->setPrix($request->request->get('prix'));    
+                        $billet->setPrix($request->request->get('prix'));   
+                        $manager->persist($billet);
                         $manager->persist($voiture);
                         $manager->flush();
                         return $this->redirectToRoute('App_payer', [], Response::HTTP_SEE_OTHER);
@@ -96,7 +97,6 @@ class TransportController extends AbstractController
     public function payer(SessionInterface $session,BilletRepository $billetRepo, EntityManagerInterface $manager){
         $this->addFlash('success','Votre reservation a été préenregistrer il reste juste le paiement');
         $facture = $session->get("billet");
-        $billetRepo->add($facture,true);
         return $this->render('transport/paiement.html.twig',[
             'billet'=>$facture,
             'controller_name'=>'TransportController']);

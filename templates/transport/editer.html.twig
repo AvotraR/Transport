@@ -21,7 +21,6 @@
                 {% endfor%}
             {%endfor%}
             {{form_start(form)}}
-               
                 <div class="grid-item">
                     <div id="prixTotal">
                         <button  id="btn-model" class="btn btn-success">info</button>
@@ -90,9 +89,11 @@
         const array_voiture = [];
         const btn_model = document.getElementById('btn-model')
         const btn = document.getElementById("btn")
+
         for(i=0;i<check.length;i++){
                 j=1;
                 check[i].addEventListener('click',function(e){
+                    e.preventDefault()
                     if(!this.style.backgroundColor){
                         prixTotal.style.display="flex";
                         this.style.backgroundColor="rgb(48, 255, 29)";
@@ -146,6 +147,7 @@
                     conteneur[i].parentElement.parentElement.appendChild(newP)
             }
         }())
+
             const model = document.getElementById('model')
             btn_model.addEventListener('click',function(event){
                 event.preventDefault();
@@ -155,7 +157,8 @@
                 if (event.target == model) {
                   model.style.display = "none";
                 }
-            } 
+            }
+        
     </script>
 {% endblock%}
 {%endblock%}

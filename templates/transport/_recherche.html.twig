@@ -1,0 +1,36 @@
+<div id="container-billet">
+    <div class="contents">
+            {{form_start(formBillet)}}
+            {% for type , messages in app.flashes%}
+                {%for message in messages%}
+                    <div class="alert alert-{{type}}">
+                        {{message}}
+                    </div>
+                {% endfor%}
+            {%endfor%}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{form_row(formBillet.depart)}}
+                        </div>
+                        <div class="col-md-4">
+                            {{form_row(formBillet.destination)}}
+                        </div>
+                        <div class="col-md-4">
+                            {{form_row(formBillet.categorie)}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                            {{form_row(formBillet.DateReservation)}}
+                </div>
+                <div class="col-md-3">
+                    <div class="btn-action">
+                        <button type="submit" id="verifie">Verifier</button>
+                    </div>
+                </div>
+            </div>
+            {{form_end(formBillet)}}
+    </div>
+</div>

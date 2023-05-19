@@ -18,15 +18,15 @@ class RechercheType extends AbstractType
         $builder
             ->add('destination',EntityType::class,[
                 'class'=>Destination::class,
-                'choice_label'=>"ville"
+                'choice_label'=>"ville",
             ])
             ->add('categorie',EntityType::class,[
                 'class'=>Categorie::class,
-                'choice_label'=>"categorie"
+                'choice_label'=>"categorie",
             ])
             ->add('depart',EntityType::class,[
                 'class'=>Depart::class,
-                'choice_label'=>"ville"
+                'choice_label'=>"ville",
             ])
             ->add('DateReservation', DateType::class,
             [

@@ -14,18 +14,19 @@
     <div class="paymentBuilder">
         <div class="paymentContainer">
             <div class="infoContent col-md-6">
-                <p>Nom :{{billet.Nom}}</p>
-                <p>Prenom {{billet.Prenom}}</p>
-                <p>CIN :{{billet.CIN}}</p>
                 <p>Depart :{{billet.depart.ville}}</p>
                 <p>Destination :{{billet.destination.ville}}</p>
                 <p>Categorie :{{billet.categorie.categorie}}</p>
                 <p>Date de depart :{{billet.DateReservation|date('d/m/y')}}</p>    
                 <p>Place :</br>
                 {{billet.place}}</p>
-                {% for voiture in billet.voitures%}
+                {% for voiture in billet.Voiture%}
                     <p>Voiture:{{voiture.numero}} n°:{{voiture.id}}</p>
                 {%endfor%}
+                {{form_start(form)}}
+                    {{form_row(form)}}
+                    <button>envoyer</button>
+                {{form_end(form)}}
                 <p>---------------------------------</p>
                 <p>Prix total :{{billet.prix}}</p>
                 <button>Payer</button>

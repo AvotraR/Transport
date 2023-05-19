@@ -18,15 +18,15 @@ class Billet
     #[Groups("post:read")]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'billets',cascade:["persist"])]
+    #[ORM\ManyToOne(inversedBy: 'billets')]
     #[Groups("post:read")]
     private ?Destination $destination = null;
 
-    #[ORM\ManyToOne(inversedBy: 'billets',cascade:["persist"])]
+    #[ORM\ManyToOne(inversedBy: 'billets')]
     #[Groups("post:read")]
     private ?Categorie $categorie = null;
 
-    #[ORM\ManyToOne(inversedBy: 'billets',cascade:["persist"])]
+    #[ORM\ManyToOne(inversedBy: 'billets')]
     #[Groups("post:read")]
     private ?Depart $depart = null;
 

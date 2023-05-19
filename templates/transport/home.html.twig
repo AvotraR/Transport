@@ -3,15 +3,16 @@
 
 <div class="head"> 
     <div class="container">
-        <div class="title">
-            <h1>Transport Madagascar</h1>
-            <p>Notre company vous offre de la confort pour votre voyage</p>
-        </div>        
+        <div class="row">
+            <div class="title">
+                <h1>Transport Madagascar</h1>
+                <p>Notre company vous offre de la confort pour votre voyage</p>
+            </div>        
+        </div>    
+        {%include('transport/_recherche.html.twig')%}
     </div>
 </div>
-<svg class="svg" width="100%" height ="60">
-  <path id="style"  d="M625 0 L0 50 L1250 50 Z" stroke="white" fill="white"/>
-</svg>
+
 {%endblock%}
 {% block body %}
 <style>

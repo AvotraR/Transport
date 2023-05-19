@@ -13,6 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
@@ -25,27 +26,6 @@ class BilletType extends AbstractType
             ->add('Prenom')
             ->add('Telephone')
             ->add('CIN')
-            ->add('destination',EntityType::class,[
-                'class'=>Destination::class,
-                'choice_label'=>"ville"
-            ])
-            ->add('categorie',EntityType::class,[
-                'class'=>Categorie::class,
-                'choice_label'=>"categorie"
-            ])
-            ->add('depart',EntityType::class,[
-                'class'=>Depart::class,
-                'choice_label'=>"ville"
-            ])
-            ->add('DateReservation', DateType::class,
-            [
-                'label' => 'Date de depart',
-                'widget' => 'single_text',
-                'required' => true,
-                'attr' => [
-                    'class' => 'datetime',
-                ],
-            ])
         ;
     }
 

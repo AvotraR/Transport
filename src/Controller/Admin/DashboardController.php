@@ -42,6 +42,11 @@ class DashboardController extends AbstractDashboardController
         return Dashboard::new()
             ->setTitle('Transport');
     }
+    #[Route('/admin/liste', name:'Liste')]
+    public function Liste(): Response
+    {
+        return $this->render('admin/Liste.html.twig');
+    }
 
     public function configureMenuItems(): iterable
     {
@@ -51,6 +56,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Destination', 'fa fa-flag-checkered' , Destination::class);
         yield MenuItem::linkToCrud('Voiture', 'fa fa-car' , Voiture::class);
         yield MenuItem::linkToCrud('Billet', 'fa fa-flag-checkered' , Billet::class);
+        
+        yield MenuItem::linkToRoute('Liste par voiture','fa fa-flag','Liste');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

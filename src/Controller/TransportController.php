@@ -33,26 +33,25 @@ class TransportController extends AbstractController
         $Recherche = new Recherche();
         $form = $this->createForm(RechercheType::class,$Recherche);
         $form->handleRequest($request);
+        $voitures = $session->get("voiture");
+        $billets = $session->get("billet");
         if($form->isSubmitted() && $form-> isValid()){
             $prix = $prixRepo->searchPrix($Recherche);
             $voiture = $voitureRep->searhVoit($Recherche);
             $billet = $facture->prix($Recherche,$prix);
             $session->set("billet",$billet); 
             $session->set("voiture",$voiture);
-           // $response = $this->redirectToRoute('App_place_voiture', [], Response::HTTP_SEE_OTHER);
-            //return new JsonResponse(['content'=>$response]);
-            //if($request->get('ajax')){
-            //}
-            if($prix==null){
-                $this->addFlash('danger','Desolez nous n\'avons pas des voitures pour cette destination');
-            }else{    
-                 return $this->redirectToRoute('App_place_voiture', [], Response::HTTP_SEE_OTHER);
+            if($request->get('ajax')){
+                return new JsonResponse([
+                    'content'=>$this->renderView('transport/reservation.html.twig', ['voitures'=>$voitures,'billet'=>$billet])
+                ]);
             }
         }
         return $this->render('transport/reservation.html.twig', [
             'controller_name' => 'TransportController',
-            'formBillet' => $form->createView()
-
+            'formBillet' => $form->createView(),
+            'voitures'=>$voitures,
+            'billet'=>$billets
         ]);
     }
     #[Route ('/billet/edit', name:'App_place_voiture')]
@@ -105,7 +104,7 @@ class TransportController extends AbstractController
             if($prix==null){
                 $this->addFlash('danger','Desolez nous n\'avons pas des voitures pour cette destination');
             }else{    
-                return $this->redirectToRoute('App_place_voiture', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_billet', [], Response::HTTP_SEE_OTHER);
             }
         }
         return $this->render('transport/home.html.twig',[

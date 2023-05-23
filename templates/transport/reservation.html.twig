@@ -2,6 +2,7 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{asset('css/yy.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/Place.css')}}">
 {% endblock %}
 {% block body %}
 <section class="reservation">
@@ -9,6 +10,9 @@
         <h4>Reservation</h4>
     </div>
     {%include('transport/_recherche.html.twig')%}
+    {%include('transport/_content.html.twig')%}
+    
+    <script src="{{asset('js/Place.js')}}" defer></script>
     <script defer>
         form = document.querySelector('form')
         ev()
@@ -19,16 +23,14 @@
                     param.append(key,value)
                 })
 
-                const url = new URL("https://127.0.0.1:8000/billet/edit")
+                const url = new URL(window.location.href)
                 // creer un requete AJAX
-                fetch(url.pathname + "?" + param.toString() + "&ajax=1",{
+                fetch(url.pathname + "?" + param.toString() + "&ajax = 1",{
                     headers: {
                         "X-Requested-with":"XMLHttpRequest"
                     }
                 }).then(response=>{
-                    response.json()
-                }).then(data =>{
-                    console.log(data)
+                    console.log(response.json())
                 }).catch(e=> alert(e))
         }
     </script>

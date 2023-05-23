@@ -1,9 +1,3 @@
-
-{% extends 'base.html.twig'%}
-{% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{asset('css/yy.css')}}">
-{% endblock %}
-{% block body %}
 {% set i = 0%}
 {%set j = i+1 %}
 <form method="post">
@@ -38,20 +32,15 @@
                         {%if voiture.id == temp%}
                             {%set i = 0%}
                         {%endif%}
-                        <div class="content_place">
-                            <input type="hidden" name="" value="{{voiture.id}}" id="voitureId">
+                        <div class="content_place" id="{{voiture.id}}">
                             {%for place in voiture.place%}
-                            <div class="check" id="{{voiture.id}}">
-                                <p>{{i}}</p>
                                 {%if place == ''%}
-                                <input type="checkbox" name="place[]" id="" value= "0" class="place" >
+                                    <button name="place[]" id="" value= "0" class="place">{{i}}</button>
                                 {%else%}
-                                <input type="radio" name="place[]" id="" value= "{{place}}" class="place" checked="true">
+                                    <button name="place[]" id="" value= "{{place}}" class="place">{{i}}</button>
                                 {%endif%}
                                 {%set i = i+1 %}
-                            </div>
                             {%endfor%}
-                            <input type="checkbox" name="ok" id="" class="ok">
                         </div>
                     </div>
             </div>
@@ -61,100 +50,3 @@
     </div>       
     <button type="submit">coco</button>
 </form>
-<script>
-    const voitureId = document.getElementById('voitureId')
-    const arrayP = []
-    const valeur = document.getElementById('valeur')
-    document.querySelectorAll('.place').forEach((place)=>{
-       //place.style.display="none"
-        if(place.value==1){
-            place.checked=true
-            place.disabled=true
-            place.parentNode.style.backgroundColor="red"
-        }else{
-            place.checked=false
-        }
-    })
-    const place_prise = document.getElementById('place_prise')
-    const all_voiture = document.querySelector('.all_voiture')
-    const numPlace = document.getElementById('numPlace')
-    const prixQt = document.getElementById('prixQt')
-    const prix = document.getElementById('prix')
-    const array_place=[]
-    let j=1
-    let selectedCar = 0
-    const content_place = document.querySelectorAll('.content_place');
-    content_place.forEach((content)=>{
-        content.addEventListener('click',()=>{
-                console.log(content.firstElementChild.value+"ajouter")
-                content.style.backgroundColor="grey"
-                selectedCar = content.firstElementChild.value
-                cc()
-        })
-        if(selectedCar==0){
-            content.style.backgroundColor="red" 
-            content.removeEventListener('click',coco())
-        }
-    })
-    
-    let ki=0
-    function cc(){
-
-        document.querySelectorAll('.check').forEach((check)=>{
-                    check.addEventListener('click',function coco(e){
-                        e.preventDefault()
-                        if(check.children[1].type=="checkbox"){
-                            if(!check.style.backgroundColor){
-                                check.style.backgroundColor="rgb(48, 255, 29)";
-                                check.style.opacity="0.8";
-                                check.children[1].checked=true
-                                check.children[1].value=1
-                                idValue=check.id
-                                //voiture=voitureId.value
-                                array_place.push(check.children[0].textContent);
-                                prixQt.value=(prix.value*j);
-                                selectedCar++
-                                j++;
-                            }else{
-                                check.style.backgroundColor=""
-                                check.children[1].checked=false
-                                check.style.opacity="1";
-                                check.children[1].value=0
-                                prixQt.value=prixQt.value - prix.value;
-                                j--;
-                                prixQt.placeholder=prixQt.value;
-                                array_place.pop();
-                                selectedCar--
-                                console.log(selectedCar)
-                            }
-                            place_prise.value=array_place
-                            
-                        }
-                    })
-        })
-    
-    }
-    
-    conteneur = document.querySelectorAll('.conteneur')
-    desc = document.querySelectorAll('.desc')
-    l=0
-    let i =0
-    for(i=0;i<conteneur.length;i++){
-        let c = 0
-        count = conteneur[i].children[0].children.length
-            for(k=0;k<count;k++){
-                if((!(conteneur[i].children[0].children[k].style.backgroundColor))&&(conteneur[i].children[0].children[k].className=="check")){
-                    c++;
-                }
-            }
-            newP = document.createElement('p')
-            newP.innerText="Place libre"+c
-        for(j=2+i;j<desc.length+l;j++){
-            desc[i].appendChild(newP)
-        }
-        l++
-    }
-    
-</script>
-
-{%endblock%}

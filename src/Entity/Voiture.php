@@ -42,6 +42,7 @@ class Voiture
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $Heure = null;
 
+
     public function __construct()
     {
         $this->billets = new ArrayCollection();
@@ -179,5 +180,4 @@ class Voiture
     {
         return $this->Numero;
     }
-    
 }

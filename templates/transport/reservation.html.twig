@@ -9,29 +9,10 @@
     <div class="title-head">
         <h4>Reservation</h4>
     </div>
-    {%include('transport/_recherche.html.twig')%}
-    {%include('transport/_content.html.twig')%}
+    <div id="carPlace">
+        {%include('transport/_content.html.twig')%}
+    </div>
     
-    <script src="{{asset('js/Place.js')}}" defer></script>
-    <script defer>
-        form = document.querySelector('form')
-        ev()
-        function ev(){
-                const Form = new FormData(form)
-                const param = new URLSearchParams()
-                Form.forEach((value , key)=>{
-                    param.append(key,value)
-                })
-
-                const url = new URL(window.location.href)
-                // creer un requete AJAX
-                fetch(url.pathname + "?" + param.toString() + "&ajax = 1",{
-                    headers: {
-                        "X-Requested-with":"XMLHttpRequest"
-                    }
-                }).then(response=>{
-                    console.log(response.json())
-                }).catch(e=> alert(e))
-        }
-    </script>
+    <script src="{{asset('js/Place.js')}}"></script>
+    
 {% endblock %}

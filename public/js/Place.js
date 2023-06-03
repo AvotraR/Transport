@@ -1,13 +1,14 @@
-const voitureId = document.getElementById('voitureId')
 const arrayP = []
 const valeur = document.getElementById('valeur')
 const place_prise = document.getElementById('place_prise')
 const all_voiture = document.querySelector('.all_voiture')
+const voitureId = document.getElementById('voitureId')
 const numPlace = document.getElementById('numPlace')
 const prixQt = document.getElementById('prixQt')
 const prix = document.getElementById('prix')
 const content_place = document.querySelectorAll('.content_place')
 const desc = document.querySelectorAll('.desc')
+const grid_content = document.getElementById('grid-content')
 const array_place=[]
 let j=1
 let l=0
@@ -48,31 +49,36 @@ let selectedCar = 0
             }
         }
         //creation d'un nouvelle element qui va contenir les nombres de place
-        newP = document.createElement('p')
-        newP.innerText="Place libre "+c
+        newP = document.createElement('div')
+        newP.className='row'
+        p = document.createElement('p')
+        p.innerText="Place libre "+c
+        newP.appendChild(p)
         for(j=2+i;j<desc.length+l;j++){
             desc[i].appendChild(newP)
         }
         l++
     }
     //designer place selectionner
+    let pl = 1
     document.querySelectorAll('.place').forEach((place)=>{
         place.addEventListener('click',function coco(e){
             e.preventDefault()
                 if(!place.style.backgroundColor){
                     place.style.backgroundColor="rgb(48, 255, 29)";
                     place.value=1
-                    //voiture=voitureId.value
+                    voitureId.value=place.parentElement.id
                     array_place.push(place.textContent);
-                    prixQt.value=(prix.value*j);
+                    prixQt.value=(prix.value*pl)
                     selectedCar++;
+                    grid_content.style.display="flex";
                     Desactiver(place.parentElement) 
-                    j++;
+                    pl++;
                 }else{
                     place.style.backgroundColor=""
                     place.value=0
                     prixQt.value=prixQt.value - prix.value;
-                    j--;
+                    pl--;
                     prixQt.placeholder=prixQt.value;
                     array_place.pop();
                     selectedCar--

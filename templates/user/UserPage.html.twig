@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{%block header%}
+
+{%endblock%}
+{% block body %}
+    {% if app.user %}
+        <h1>{{app.user.numero}}</h1>
+        <h1>{{app.user.Nom}}</h1>
+        <h1>{{app.user.Prenom}}</h1>
+        <p>Voiture:{{voiture.numero}}</p>
+        <p>Place:{{place}}</p>
+        <p>Depart :{{billet.depart.ville}}</p>
+        <p>Destination :{{billet.destination.ville}}</p>
+        <p>Categorie :{{billet.categorie.categorie}}</p>
+        <p>Date de depart :{{billet.DateReservation|date('d/m/y')}}</p> 
+        <p>Prix:{{prix}}</p>
+    {%endif%}
+{% endblock %}

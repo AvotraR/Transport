@@ -29,12 +29,22 @@
     color:#8d97ad;
 }
 /* grid */
+
+.place{
+    border: 1px solid transparent;
+    color:#303641;
+    background-color: #ababac;
+}
 .content_place{
     grid-column: 1 / 6;
     border-bottom: 1px solid;
     margin-bottom: 8px;
+    border: 1px solid #1165ff;
 }
-#prixTotal{
+.place:active{
+    border:none;
+}
+#grid-content{
     display:none;
     margin:20px;
     justify-content:flex-end;
@@ -57,24 +67,6 @@
     text-align:center;
 }
 
-/* collection fieldset for voiture */
-.collection{
-    display:block;
-    flex-direction:column;
-    width: 100%;
-    padding: 20px;
-    border: 1px solid transparent;
-    border-radius: 0.5rem;
-    box-shadow: 2px 2px 2px #111;
-    background-color:rgb(21,32,43);
-}
-.schema{
-    display:flex;
-    flex-direction: column;
-    align-items:center;
-    width:100%;
-    
-}
 /* conteneur fieldset of place */
 .content_place{
     display: grid;
@@ -93,10 +85,24 @@
 .place:hover{
     cursor:pointer;
 }
-.active{
-    background-color: rgb(98, 238, 98);
+.all_voiture{
+    display:flex;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid transparent;
+    background-color: #f2f3f5;
 }
-
+.oneVoiture{
+    width:100%;
+    border:1px solid transparent;
+    border-radius: 0.25em; ;
+    background-color: #fff;
+    margin: 10px;
+}
+.desc .row{
+    justify-content: center;
+    margin:10px;
+}
 /* instruction */
 .instruction{
     display: flex;
@@ -120,12 +126,3 @@
     }
 }
 
-.Numero{
-    width: 150px;
-    border: none;
-    height: 40px;
-    padding-left: 0px;
-    padding-right: 40px;
-    letter-spacing: 0;
-    background:transparent;
-}

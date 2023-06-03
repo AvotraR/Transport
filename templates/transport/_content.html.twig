@@ -2,7 +2,7 @@
 {%set j = i+1 %}
 <form method="post">
     <div class="grid-item">
-        <div id="priTotal">
+        <div id="grid-content">
             <button  id="btn-model" class="btn btn-success">info</button>
             <div class="model" id="model">
                 <div class="model-content">
@@ -13,9 +13,9 @@
                 </div>
             </div>
             <label for="Place_prise" class="label-prise">Prix a payer(Ariary):</label>
-            <input type="text" id="prix" value="{{billet.prix}}">
+            <input type="hidden" id="prix" value="{{billet.prix}}">
             <input type="text" id="prixQt" name="prix" value=""  readonly>
-            <input type="hidden" id="id_prise" name="id_voiture" value="">
+            <input type="hidden" id="voitureId" name="voitureId" value="">
             <input type="hidden" id="place_prise" name="place_prise" value="">
             <button class=" btn btn-outline-success mb-3" id="btn">{{ button_label|default('Passer au paiement') }}</button>
         </div>  
@@ -23,30 +23,36 @@
             {%for voiture in voitures%}
             <div class="oneVoiture">
                 <div class="desc">
-                    {{voiture.numero}}
-                    {{voiture.categorie}}
-                    <input type="hidden" name="" value="{{voiture.id}}" id="voitureId">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>Numero: {{voiture.numero}}</p>
+                            <p>Type: {{voiture.categorie}}</p>
+                            <input type="hidden" name="" value="{{voiture.id}}" id="voitureId">
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{billet.depart.ville}} ---> {{billet.Destination}}</p>
+                        </div>
+                    </div>
                 </div>
                     <div class="conteneur">
                         {%set temp = voiture.id%}
                         {%if voiture.id == temp%}
                             {%set i = 0%}
                         {%endif%}
-                        <div class="content_place" id="{{voiture.id}}">
-                            {%for place in voiture.place%}
-                                {%if place == ''%}
-                                    <button name="place[]" id="" value= "0" class="place">{{i}}</button>
-                                {%else%}
-                                    <button name="place[]" id="" value= "{{place}}" class="place">{{i}}</button>
-                                {%endif%}
-                                {%set i = i+1 %}
-                            {%endfor%}
-                        </div>
+                                <div class="content_place" id="{{voiture.id}}">
+                                    {%for place in voiture.place%}
+                                            {%if place == ''%}
+                                                <button name="place[]" id="" value= "0" class="place">{%if i==0%} {{"C"}} {%else%}{{i}}{%endif%}</button>
+                                            {%else%}
+                                                <button name="place[]" id="" value= "{{place}}" class="place">{%if i==0%} {{"C"}} {%else%}{{i}}{%endif%}</button>
+                                            {%endif%}
+                                            {%set i = i+1 %}
+                                        {%endfor%}
+                                </div>
                     </div>
             </div>
             {%endfor%}
         </div>
             
     </div>       
-    <button type="submit">coco</button>
 </form>

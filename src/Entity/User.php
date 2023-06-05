@@ -34,6 +34,14 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $Email = null;
 
+    #[ORM\OneToMany(mappedBy: 'User', targetEntity: Billet::class)]
+    private Collection $billets;
+
+    public function __construct()
+    {
+        $this->billets = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +113,36 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     public function setEmail(string $Email): self
     {
         $this->Email = $Email;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Billet>
+     */
+    public function getBillets(): Collection
+    {
+        return $this->billets;
+    }
+
+    public function addBillet(Billet $billet): self
+    {
+        if (!$this->billets->contains($billet)) {
+            $this->billets[] = $billet;
+            $billet->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBillet(Billet $billet): self
+    {
+        if ($this->billets->removeElement($billet)) {
+            // set the owning side to null (unless already changed)
+            if ($billet->getUser() === $this) {
+                $billet->setUser(null);
+            }
+        }
 
         return $this;
     }

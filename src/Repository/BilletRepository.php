@@ -38,6 +38,16 @@ class BilletRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function existeDeja($reservation){
+        return $this->createQueryBuilder('b')
+                   ->andWhere('b.place = :place')
+                   ->andWhere('b.DateReservation = :DateReservation')
+                   ->setParameter('place', $reservation->getPlace())
+                   ->setParameter('DateReservation', $reservation->getDateReservation())
+                   ->getQuery()
+                   ->getResult()
+               ;
+    }
 
 //    /**
 //     * @return Billet[] Returns an array of Billet objects

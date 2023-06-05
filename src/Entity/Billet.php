@@ -34,22 +34,6 @@ class Billet
     #[Groups("post:read")]
     private ?\DateTimeInterface $DateReservation = null;
 
-    #[ORM\Column(length: 20)]
-    #[Groups("post:read")]
-    private ?string $Nom = null;
-
-    #[ORM\Column(length: 20)]
-    #[Groups("post:read")]
-    private ?string $Prenom = null;
-
-    #[ORM\Column]
-    #[Groups("post:read")]
-    private ?int $Telephone = null;
-
-    #[ORM\Column]
-    #[Groups("post:read")]
-    private ?int $CIN = null;
-
     #[ORM\Column]
     #[Groups("post:read")]
     private ?int $prix = null;
@@ -58,13 +42,12 @@ class Billet
     #[Groups("post:read")]
     private ?string $place = null;
 
-    #[ORM\ManyToMany(targetEntity: Voiture::class, inversedBy: 'billets',cascade:["persist"])]
-    private Collection $voitures;
+    #[ORM\ManyToOne(inversedBy: 'billets')]
+    private ?User $User = null;
 
-    public function __construct()
-    {
-        $this->voitures = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'Reservation')]
+    private ?Voiture $voiture = null;
+
 
     public function getId(): ?int
     {
@@ -118,55 +101,6 @@ class Billet
 
         return $this;
     }
-
-    public function getNom(): ?string
-    {
-        return $this->Nom;
-    }
-
-    public function setNom(string $Nom): self
-    {
-        $this->Nom = $Nom;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->Prenom;
-    }
-
-    public function setPrenom(string $Prenom): self
-    {
-        $this->Prenom = $Prenom;
-
-        return $this;
-    }
-
-    public function getTelephone(): ?int
-    {
-        return $this->Telephone;
-    }
-
-    public function setTelephone(int $Telephone): self
-    {
-        $this->Telephone = $Telephone;
-
-        return $this;
-    }
-
-    public function getCIN(): ?int
-    {
-        return $this->CIN;
-    }
-
-    public function setCIN(int $CIN): self
-    {
-        $this->CIN = $CIN;
-
-        return $this;
-    }
-
     public function getPrix(): ?int
     {
         return $this->prix;
@@ -191,28 +125,27 @@ class Billet
         return $this;
     }
 
-    /**
-     * @return Collection<int, Voiture>
-     */
-    public function getVoitures(): Collection
+    public function getUser(): ?User
     {
-        return $this->voitures;
+        return $this->User;
     }
 
-    public function addVoiture(Voiture $voiture): self
+    public function setUser(?User $User): self
     {
-        if (!$this->voitures->contains($voiture)) {
-            $this->voitures[] = $voiture;
-        }
+        $this->User = $User;
 
         return $this;
     }
 
-    public function removeVoiture(Voiture $voiture): self
+    public function getVoiture(): ?Voiture
     {
-        $this->voitures->removeElement($voiture);
+        return $this->voiture;
+    }
+
+    public function setVoiture(?Voiture $voiture): self
+    {
+        $this->voiture = $voiture;
 
         return $this;
     }
-
 }

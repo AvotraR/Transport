@@ -36,18 +36,21 @@ class Voiture
     #[ORM\Column]
     private ?bool $isArrived = null;
 
-    #[ORM\ManyToMany(targetEntity: Billet::class, mappedBy: 'voitures')]
-    private Collection $billets;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $Heure = null;
+    #[ORM\OneToMany(mappedBy: 'voiture', targetEntity: Billet::class)]
+    private Collection $Reservation;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateDepart = null;
+
 
 
     public function __construct()
     {
-        $this->billets = new ArrayCollection();
+        $this->Reservation = new ArrayCollection();
     }
-   
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -137,47 +140,51 @@ class Voiture
         return $this;
     }
 
-    /**
-     * @return Collection<int, Billet>
-     */
-    public function getBillets(): Collection
-    {
-        return $this->billets;
-    }
-
-    public function addBillet(Billet $billet): self
-    {
-        if (!$this->billets->contains($billet)) {
-            $this->billets[] = $billet;
-            $billet->addVoiture($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBillet(Billet $billet): self
-    {
-        if ($this->billets->removeElement($billet)) {
-            $billet->removeVoiture($this);
-        }
-
-        return $this;
-    }
-
-    public function getHeure(): ?\DateTimeInterface
-    {
-        return $this->Heure;
-    }
-
-    public function setHeure(\DateTimeInterface $Heure): self
-    {
-        $this->Heure = $Heure;
-
-        return $this;
-    }
-
     public function __toString()
     {
         return $this->Numero;
     }
+
+    /**
+     * @return Collection<int, Billet>
+     */
+    public function getReservation(): Collection
+    {
+        return $this->Reservation;
+    }
+
+    public function addReservation(Billet $reservation): self
+    {
+        if (!$this->Reservation->contains($reservation)) {
+            $this->Reservation[] = $reservation;
+            $reservation->setVoiture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Billet $reservation): self
+    {
+        if ($this->Reservation->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getVoiture() === $this) {
+                $reservation->setVoiture(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getDateDepart(): ?\DateTimeInterface
+    {
+        return $this->dateDepart;
+    }
+
+    public function setDateDepart(?\DateTimeInterface $dateDepart): self
+    {
+        $this->dateDepart = $dateDepart;
+
+        return $this;
+    }
+
 }

@@ -50,16 +50,12 @@ class VoitureRepository extends ServiceEntityRepository
                            ->AndWhere('dest.id IN (:destination)')
                            ->setParameter('destination',$billet->getDestination());
         }
-        return $query->getQuery()->getResult();
-    }
-    public function searchNumVoit(String $numero){
-        $query = $this->createQueryBuilder('v');
-        if($numero){
-            $query=$query->AndWhere('v.numero ='.$numero);
+        if($billet->getDateReservation()){
+            $query = $query->AndWhere('v.dateDepart IN (:date)')
+                           ->setParameter('date',$billet->getDateReservation());
         }
         return $query->getQuery()->getResult();
     }
-   
 
 //    /**
 //     * @return Voiture[] Returns an array of Voiture objects

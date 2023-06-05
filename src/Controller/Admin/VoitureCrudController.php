@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use DateTime;
 use App\Entity\Voiture;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
@@ -25,7 +27,8 @@ class VoitureCrudController extends AbstractCrudController
             AssociationField::new('Destination'),
             NumberField::new('NbPlace'),
             BooleanField::new('isArrived'),
-            CollectionField::new('Place')->setEntryType(CheckboxType::class)->allowDelete(false),
+            //CollectionField::new('Place')->setEntryType(CheckboxType::class)->allowDelete(false),
+            DateField::new('dateDepart'),
         ];
     }
 }

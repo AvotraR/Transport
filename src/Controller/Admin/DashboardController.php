@@ -6,7 +6,10 @@ use App\Entity\Billet;
 use App\Entity\Depart;
 use App\Entity\Voiture;
 use App\Entity\Categorie;
+use App\Form\VoitureType;
 use App\Entity\Destination;
+use App\Repository\VoitureRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -43,9 +46,27 @@ class DashboardController extends AbstractDashboardController
             ->setTitle('Transport');
     }
     #[Route('/admin/liste', name:'Liste')]
-    public function Liste(): Response
+    public function Liste(Request $request, VoitureRepository $voitureRepository): Response
     {
-        return $this->render('admin/Liste.html.twig');
+        $voiture = new Voiture();
+        $form = $this->createForm(VoitureType::class, $voiture);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $Nbplace = $voiture->getNbPlace();
+            for($i=0;$i<=$Nbplace;$i++){
+                $place[0]=true;
+                $place[$i]=false;
+            } 
+            $voiture->setPlace($place);
+            $voitureRepository->add($voiture, true);
+            return $this->redirectToRoute('app_voiture_index', [], Response::HTTP_SEE_OTHER);
+        }
+        return $this->renderForm('/admin/Liste.html.twig', [
+            'form'=>$form->createView(),
+            'voiture' => $voiture,
+            'form' => $form,
+        ]);
     }
 
     public function configureMenuItems(): iterable

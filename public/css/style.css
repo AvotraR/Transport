@@ -251,3 +251,10 @@
     background-repeat: no-repeat;
     background-position: center;
 }
+#userContent{
+    margin-top: 10px;
+}
+#userContent .billet{
+    border:2px solid;
+    border-radius: 10px;
+}

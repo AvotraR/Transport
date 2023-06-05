@@ -17,15 +17,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TransportController extends AbstractController
 {
     #[Route('/billet/Place', name: 'App_Place')]
-    public function CarPlace(SessionInterface $session,EntityManagerInterface $manager,Request $request, PrixRepository $prixRepo,VoitureRepository $voitureRep,PaiementService $facture){
+    public function CarPlace(SessionInterface $session,Request $request){
         $voitures = $session->get("voiture");
         $billet = $session->get("billet");
+
         if($request->request->count()>0){
             $session->get("datas");
             $data = $request->request;
             $session->set("datas",$data);
             return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
         }
+
         return $this->render('transport/reservation.html.twig', [
                     'voitures'=>$voitures,
                     'billet'=>$billet
@@ -33,7 +35,7 @@ class TransportController extends AbstractController
     }
     
     #[Route('/', name: 'App_home')]
-    public function home(SessionInterface $session,EntityManagerInterface $manager,Request $request, PrixRepository $prixRepo,VoitureRepository $voitureRep,PaiementService $facture){
+    public function home(SessionInterface $session,Request $request, PrixRepository $prixRepo,VoitureRepository $voitureRep,PaiementService $facture){
         $Recherche = new Recherche();
         $form = $this->createForm(RechercheType::class,$Recherche);
         $form->handleRequest($request);

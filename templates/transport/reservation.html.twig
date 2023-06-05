@@ -10,6 +10,20 @@
         <h4>Reservation</h4>
     </div>
     <div id="carPlace">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Depart</h2>
+                <p>{{billet.depart.ville}}</p>
+            </div>
+            <div class="col-md-4">
+                <h2>Destination</h2>
+                <p>{{billet.Destination}}</p>
+            </div>
+            <div class="col-md-4">
+                <h2>Categorie</h2>
+                <p>{{billet.categorie}}</p>
+            </div>
+        </div>
         {%include('transport/_content.html.twig')%}
     </div>
     

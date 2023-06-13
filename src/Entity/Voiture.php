@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\VoitureRepository;
+use DateTime;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -123,6 +124,10 @@ class Voiture
 
     public function isIsArrived(): ?bool
     {
+        $now = new DateTime();
+        if($this->getDateDepart()<$now){
+            $this->setIsArrived(true);
+        }
         return $this->isArrived;
     }
 

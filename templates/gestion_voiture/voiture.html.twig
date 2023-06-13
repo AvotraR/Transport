@@ -1,0 +1,65 @@
+{% extends 'base.html.twig'%}
+{% block body %}
+<div class="col-12 mt-5">
+    <div class="contents">
+        {{form_start(formBillet,{'attr': {'id': 'searchForm'}})}}
+        {% for type , messages in app.flashes%}
+            {%for message in messages%}
+                <div class="alert alert-{{type}}">
+                    {{message}}
+                </div>
+            {% endfor%}
+        {%endfor%}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4">
+                        {{form_row(formBillet.depart)}}
+                    </div>
+                    <div class="col-md-4">
+                        {{form_row(formBillet.destination)}}
+                    </div>
+                    <div class="col-md-4">
+                        {{form_row(formBillet.categorie)}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="btn-action">
+                    <button type="submit" id="verifie">Verifier</button>
+                </div>
+            </div>
+        </div>
+        {{form_end(formBillet)}}
+    </div>
+    <div class="col-12 mt-5">
+
+        {% if voitures is not empty %}
+        <form id ="#voitureList" method="get">
+            <div class="form-group">
+                <label class="col-form-label">Choisir la date de depart:</label>
+                <input type="date" class="form-control" name="date" id="date">
+            </div>
+            <div class="col-xl-6 mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title">choix des voitures</h4>
+                        {% for voiture in voitures %}
+                        <div class="col mb-3">
+                            <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                                <div class="card-header">
+                                    {{ voiture.numero}}
+                                    <input type="checkbox" name="voiture[]"  class="voitureCheck" value="{{voiture.id}}">
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor%}
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success btn-sm">Envoyer</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

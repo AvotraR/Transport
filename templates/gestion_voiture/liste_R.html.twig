@@ -1,0 +1,42 @@
+{% extends 'base.html.twig'%}
+{%block body%}
+    {% if billets is not empty %}
+       
+        <div class="col-lg-12 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Liste des passager:</h4>
+                    <div class="single-table">
+                        <div class="table-responsive">
+                            <table class="table text-center">
+                                <thead class="text-uppercase bg-info">
+                                    <tr class="text-white">
+                                        <th scope="col">Numero</th>
+                                        <th scope="col">Nom</th>
+                                        <th scope="col">Prenom</th>
+                                        <th scope="col">Voiture</th>
+                                        <th scope="col">Place</th>
+                                        <th scope="col">Date de depart</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for billet in billets %}
+                                        <tr>
+                                            <td>{{billet.user.numero}}</td>
+                                            <td>{{billet.user.nom}}</td>
+                                            <td>{{billet.user.prenom}}</td>
+                                            <td>{{billet.voiture}}</td>
+                                            <td>{{billet.place}}</td>
+                                            <td>{{billet.dateReservation|date('y,m,d')}}</td>
+                                            <td></td>
+                                        </tr>
+                                    {% endfor%}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {%endif%}
+{%endblock%}

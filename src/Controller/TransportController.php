@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Recherche;
 use App\Form\RechercheType;
+use App\Form\Recherche2Type;
+use App\service\VoitureService;
 use App\service\PaiementService;
 use App\Repository\PrixRepository;
 use App\Repository\VoitureRepository;
@@ -11,6 +13,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -56,4 +60,5 @@ class TransportController extends AbstractController
             'formBillet' => $form->createView()
         ]);
     }
+
 }

@@ -1,0 +1,10 @@
+{% if voitures is not empty %}
+    <h2>Résultats de la recherche :</h2>
+    <ul>
+        {% for voiture in voitures %}
+            <li>{{ voiture.numero}}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucun résultat trouvé.</p>
+{% endif %}

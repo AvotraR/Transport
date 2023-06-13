@@ -1,7 +1,41 @@
 {%extends 'base.html.twig'%}
 {%block body%}
     {{form_start(form)}}
-        {{form_row(form)}}
-        <button type="submit">Inscription</button>
+    
+    <div class="login-area login-s2">
+        <div class="container">
+            <div class="login-box ptb--100">
+                <form>
+                    <div class="login-form-head">
+                        <h4>Sign up</h4>
+                        <p>Hello there, Sign up and Join with Us</p>
+                    </div>
+                    <div class="login-form-body">
+                        <div class="form-gp">
+                            {{form_row(form.numero)}}
+                        </div>
+                        <div class="form-gp">
+                            {{form_row(form.password)}}
+                        </div>
+                        <div class="form-gp">
+                            {{form_row(form.Nom)}}
+                        </div>
+                        <div class="form-gp">
+                            {{form_row(form.Prenom)}}
+                        </div>
+                        <div class="form-gp">
+                            {{form_row(form.Email)}}
+                        </div>
+                        <div class="submit-btn-area">
+                            <a href="{{path('app_registration')}}" class="btn btn-outline-success my-2 my-sm-0">S'inscrire</a>
+                        </div>
+                        <div class="form-footer text-center mt-5">
+                            <p class="text-muted">Vous avez deja un compte? <a href="{{path("app_login")}}">Sign in</a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     {{form_end(form)}}
 {%endblock%}

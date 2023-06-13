@@ -6,8 +6,10 @@ use App\Entity\Billet;
 use App\Entity\Depart;
 use App\Entity\Voiture;
 use App\Entity\Categorie;
-use App\Form\VoitureType;
+use App\Entity\Recherche;
 use App\Entity\Destination;
+use App\Form\Recherche2Type;
+use App\service\VoitureService;
 use App\Repository\VoitureRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,30 +47,7 @@ class DashboardController extends AbstractDashboardController
         return Dashboard::new()
             ->setTitle('Transport');
     }
-    #[Route('/admin/liste', name:'Liste')]
-    public function Liste(Request $request, VoitureRepository $voitureRepository): Response
-    {
-        $voiture = new Voiture();
-        $form = $this->createForm(VoitureType::class, $voiture);
-        $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) {
-            $Nbplace = $voiture->getNbPlace();
-            for($i=0;$i<=$Nbplace;$i++){
-                $place[0]=true;
-                $place[$i]=false;
-            } 
-            $voiture->setPlace($place);
-            $voitureRepository->add($voiture, true);
-            return $this->redirectToRoute('app_voiture_index', [], Response::HTTP_SEE_OTHER);
-        }
-        return $this->renderForm('/admin/Liste.html.twig', [
-            'form'=>$form->createView(),
-            'voiture' => $voiture,
-            'form' => $form,
-        ]);
-    }
-
+    
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
@@ -77,8 +56,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Destination', 'fa fa-flag-checkered' , Destination::class);
         yield MenuItem::linkToCrud('Voiture', 'fa fa-car' , Voiture::class);
         yield MenuItem::linkToCrud('Billet', 'fa fa-flag-checkered' , Billet::class);
-        
-        yield MenuItem::linkToRoute('Liste par voiture','fa fa-flag','Liste');
+        //yield MenuItem::linkToRoute('Liste par voiture','fa fa-flag','departVoiture');
+        //yield MenuItem::linkToRoute('Voiture par voiture','fa fa-flag','listeVoiture');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

@@ -1,39 +1,97 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 <div id="userContent">
-    <div class="row">
-        <div class="col-md-4">
-            {% if app.user %}
-            <div class="row billet">
-                <div class="labelBillet col-md-6">
-                        <p>Numero:</p>
-                        <p>Nom:</p>
-                        <p>Prenom:</p>
-                        <p>Voiture:</p>
-                        <p>Place:</p>
-                        <p>Depart:</p>
-                        <p>Destination:</p>
-                        <p>Categorie</p>
-                        <p>Date de depart:</p>
-                        <p>Prix:</p>
+    <div class="main-content-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            {% if app.user %}
+                            <div class="billet-card">
+                                <div class="billet-title">
+                                    <h5>Votre reservation:</h5>
+                                </div>
+                                <div class="billet-body">
+                                    <ul>
+                                        <li class="list-group">
+                                            <div class="d-flex">
+                                                <p>Numero:</p> 
+                                                <p>{{app.user.numero}}</p>
+                                            </div>
+                                        </li>
+                                        <li class="list-group">
+                                            <div class="d-flex">
+                                                <p>Nom:</p>
+                                                <p>{{app.user.Nom}}</p>
+                                            </div>
+                                        </li>
+                                        <li class="list-group">
+                                            <div class="d-flex">
+                                                <p>Prenom:</p>
+                                                <p>{{app.user.Prenom}}</h1>
+                                            </div>
+                                        </li>
+                                        <li class="list-group">
+                                            <div class="d-flex">
+                                                <p>Voiture:</p>
+                                                <p>{{voiture.numero}}</p>
+                                            </div>
+                                        </li>
+                                        <li class="list-group">
+                                            <div class="d-flex">
+                                                <p>Place:</p>
+                                                <p>{{place}}</p>
+                                            </div>
+                                        </li>
+                                        <li class="list-group">
+                                            <div class="d-flex">
+                                                <p>Depart:</p>
+                                                <p>{{billet.depart.ville}}</p>
+                                            </div>
+                                        </li>
+                                        <li class="list-group">
+                                            <div class="d-flex">
+                                                <p>Destination:</p>
+                                                <p>{{billet.destination.ville}}</p>
+                                            </div>
+                                        </li>
+                                        <li class="list-group">
+                                            <div class="d-flex">
+                                                <p>Categorie</p>
+                                                <p>{{billet.categorie.categorie}}</p>
+                                            </div>
+                                        </li>
+                                        <li class="list-group">
+                                            <div class="d-flex">
+                                                <p>Date de depart:</p>
+                                                <p>{{billet.DateReservation|date('d/m/y')}}</p> 
+                                            </div>
+                                        </li>
+                                        <li class="list-group">
+                                            <div class="d-flex">
+                                                <p>Prix:</p>
+                                                <h5>{{prix}}Ar</h5>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            {%endif%}
+                        </div>
+                    </div>
                 </div>
-                <div class="valueBillet col-md-6">
-                        <p>{{app.user.numero}}</p>
-                        <p>{{app.user.Nom}}</p>
-                        <p>{{app.user.Prenom}}</h1>
-                        <p>{{voiture.numero}}</p>
-                        <p>{{place}}</p>
-                        <p>{{billet.depart.ville}}</p>
-                        <p>{{billet.destination.ville}}</p>
-                        <p>{{billet.categorie.categorie}}</p>
-                        <p>{{billet.DateReservation|date('d/m/y')}}</p> 
-                        <h1>{{prix}}</h1>
+                <div class="col-lg-8 mt-5">
+                    <div class="card">
+                        <div class="card-title">
+                            <h5>Toutes vos reservation</h5>
+                        </div>
+                        <div class="card-body">               
+                            {%include ('/user/_history.html.twig')%}
+                        </div>
+                    </div>
                 </div>
             </div>
-            {%endif%}
-        </div>
-        <div class="col-md-6">
-            {%include ('/user/_history.html.twig')%}
         </div>
     </div>
 </div>

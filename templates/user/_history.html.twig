@@ -1,8 +1,6 @@
 <table class="table">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">Nom</th>
-        <th scope="col">Prenom</th>
         <th scope="col">Depart</th>
         <th scope="col">Destination</th>
         <th scope="col">place</th>
@@ -12,8 +10,6 @@
     <tbody>
         {% for billet in AllBillet%}
         <tr>
-            <td>{{billet.user.nom}}</td>
-            <td>{{billet.user.prenom}}</td>
             <td>{{billet.depart.ville}}</td>
             <td>{{billet.destination.ville}}</td>
             <td>{{billet.place}}</td>

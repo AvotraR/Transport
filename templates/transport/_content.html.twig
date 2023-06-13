@@ -36,6 +36,19 @@
                             {%set i = 0%}
                         {%endif%}
                                 <div class="content_place" id="{{voiture.id}}">
+
+                                    {%for places in placesA%}
+                                        {%if places.voitures.id == voiture.id%}
+                                                {%for place in places.place%}
+                                                    {%if place == ''%}
+                                                        <button name="place[]" id="" value= "0" class="place">{%if i==0%} {{"C"}} {%else%}{{i}}{%endif%}</button>
+                                                    {%else%}
+                                                        <button name="place[]" id="" value= "{{place}}" class="place">{%if i==0%} {{"C"}} {%else%}{{i}}{%endif%}</button>
+                                                    {%endif%}
+                                                    {%set i = i+1 %}
+                                                {%endfor%}
+                                        {%endif%}
+                                    {%endfor%}
                                     {%for place in voiture.place%}
                                             {%if place == ''%}
                                                 <button name="place[]" id="" value= "0" class="place">{%if i==0%} {{"C"}} {%else%}{{i}}{%endif%}</button>
@@ -43,7 +56,8 @@
                                                 <button name="place[]" id="" value= "{{place}}" class="place">{%if i==0%} {{"C"}} {%else%}{{i}}{%endif%}</button>
                                             {%endif%}
                                             {%set i = i+1 %}
-                                        {%endfor%}
+                                    {%endfor%}
+                                    
                                 </div>
                     </div>
             </div>

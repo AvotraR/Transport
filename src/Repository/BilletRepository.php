@@ -41,9 +41,11 @@ class BilletRepository extends ServiceEntityRepository
     public function existeDeja($reservation){
         return $this->createQueryBuilder('b')
                    ->andWhere('b.place = :place')
+                   ->andWhere('b.voiture = :voiture')
                    ->andWhere('b.DateReservation = :DateReservation')
                    ->setParameter('place', $reservation->getPlace())
                    ->setParameter('DateReservation', $reservation->getDateReservation())
+                   ->setParameter('voiture', $reservation->getVoiture())
                    ->getQuery()
                    ->getResult()
                ;

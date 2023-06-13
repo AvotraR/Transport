@@ -44,11 +44,16 @@ class Voiture
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateDepart = null;
 
+    #[ORM\OneToMany(mappedBy: 'voitures', targetEntity: Place::class)]
+    private Collection $places;
+
+
 
 
     public function __construct()
     {
         $this->Reservation = new ArrayCollection();
+        $this->places = new ArrayCollection();
     }
 
 
@@ -192,4 +197,33 @@ class Voiture
         return $this;
     }
 
+    /**
+     * @return Collection<int, Place>
+     */
+    public function getPlaces(): Collection
+    {
+        return $this->places;
+    }
+
+    public function addPlace(Place $place): self
+    {
+        if (!$this->places->contains($place)) {
+            $this->places[] = $place;
+            $place->setVoitures($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlace(Place $place): self
+    {
+        if ($this->places->removeElement($place)) {
+            // set the owning side to null (unless already changed)
+            if ($place->getVoitures() === $this) {
+                $place->setVoitures(null);
+            }
+        }
+
+        return $this;
+    }
 }

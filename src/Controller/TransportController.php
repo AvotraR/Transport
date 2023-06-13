@@ -8,7 +8,9 @@ use App\Form\Recherche2Type;
 use App\service\VoitureService;
 use App\service\PaiementService;
 use App\Repository\PrixRepository;
+use App\Repository\PlaceRepository;
 use App\Repository\VoitureRepository;
+use App\service\BilletService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,10 +23,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TransportController extends AbstractController
 {
     #[Route('/billet/Place', name: 'App_Place')]
-    public function CarPlace(SessionInterface $session,Request $request){
+    public function CarPlace(SessionInterface $session,BilletService $billetService,PlaceRepository $placeRep,Request $request){
         $voitures = $session->get("voiture");
         $billet = $session->get("billet");
-
+        $places = $billetService->findPlace($billet,$voitures);
         if($request->request->count()>0){
             $session->get("datas");
             $data = $request->request;
@@ -34,7 +36,8 @@ class TransportController extends AbstractController
 
         return $this->render('transport/reservation.html.twig', [
                     'voitures'=>$voitures,
-                    'billet'=>$billet
+                    'billet'=>$billet,
+                    'placesA'=>$places
                 ]);
     }
     

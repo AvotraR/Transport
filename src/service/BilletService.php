@@ -7,19 +7,22 @@ use App\Repository\PlaceRepository;
 use App\Repository\DepartRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\DestinationRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 class BilletService{
     protected DepartRepository $departRep;
     protected CategorieRepository $catRepo;
     protected DestinationRepository $destRep;
     protected PlaceRepository $placeRep;
+    protected EntityManagerInterface $manager;
     
-    public function __construct(DepartRepository $departRep,CategorieRepository $catRepo,DestinationRepository $destRep,PlaceRepository $placeRep)
+    public function __construct(DepartRepository $departRep,CategorieRepository $catRepo,DestinationRepository $destRep,PlaceRepository $placeRep,EntityManagerInterface $manager)
     {
         $this->departRep = $departRep;
         $this->catRepo = $catRepo;
         $this->destRep = $destRep;
         $this->placeRep = $placeRep;
+        $this->manager = $manager;
     }
     public function reservationService($billetReserver,$prix,$place,$voiture,$user){
         $billet = new Billet(); 
@@ -49,10 +52,19 @@ class BilletService{
         return $places;
     }
     public function findPlace($billet,$voitures){
-        foreach($voitures as $voiture){
-            $places = $this->placeRep->findBy(['voitures'=>$voiture->getId(),'date'=>$billet->getDateReservation()]);
-            return $places; 
+        $j=0;
+        foreach($voitures as $i=> $voiture){
+            $places[$i] = $this->placeRep->findBy(['voitures'=>$voiture->getId(),'date'=>$billet->getDateReservation()]);
+            if(empty($places[$i])){
+                $place = new Place();
+                $place->setPlace($voiture->getPlace());
+                $place->setDate($billet->getDateReservation());
+                $this->manager->persist($place);
+                $this->manager->flush();
+                $places[$i] = $place;
+            }
         }
+        dd($places);
     }
 }
 

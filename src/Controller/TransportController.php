@@ -26,7 +26,7 @@ class TransportController extends AbstractController
     public function CarPlace(SessionInterface $session,BilletService $billetService,PlaceRepository $placeRep,Request $request){
         $voitures = $session->get("voiture");
         $billet = $session->get("billet");
-        $places = $billetService->findPlace($billet,$voitures);
+            $places = $billetService->findPlace($billet,$voitures);
         if($request->request->count()>0){
             $session->get("datas");
             $data = $request->request;
@@ -37,7 +37,7 @@ class TransportController extends AbstractController
         return $this->render('transport/reservation.html.twig', [
                     'voitures'=>$voitures,
                     'billet'=>$billet,
-                    'placesA'=>$places
+                    'placesA'=>$places 
                 ]);
     }
     

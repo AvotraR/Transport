@@ -24,9 +24,10 @@ class TransportController extends AbstractController
 {
     #[Route('/billet/Place', name: 'App_Place')]
     public function CarPlace(SessionInterface $session,BilletService $billetService,PlaceRepository $placeRep,Request $request){
+       
         $voitures = $session->get("voiture");
         $billet = $session->get("billet");
-            $places = $billetService->findPlace($billet,$voitures);
+        $places = $session->get("place");
         if($request->request->count()>0){
             $session->get("datas");
             $data = $request->request;
@@ -37,12 +38,12 @@ class TransportController extends AbstractController
         return $this->render('transport/reservation.html.twig', [
                     'voitures'=>$voitures,
                     'billet'=>$billet,
-                    'placesA'=>$places 
+                    'places'=>$places 
                 ]);
     }
     
     #[Route('/', name: 'App_home')]
-    public function home(SessionInterface $session,Request $request, PrixRepository $prixRepo,VoitureRepository $voitureRep,PaiementService $facture){
+    public function home(SessionInterface $session,Request $request,BilletService $billetService, PrixRepository $prixRepo,VoitureRepository $voitureRep,PaiementService $facture){
         $Recherche = new Recherche();
         $form = $this->createForm(RechercheType::class,$Recherche);
         $form->handleRequest($request);
@@ -50,8 +51,10 @@ class TransportController extends AbstractController
             $prix = $prixRepo->searchPrix($Recherche);
             $voiture = $voitureRep->searhVoit($Recherche);
             $billet = $facture->prix($Recherche,$prix);
+            $places = $billetService->findPlace($billet,$voiture);
             $session->set("billet",$billet); 
             $session->set("voiture",$voiture);
+            $session->set("place",$places);
             if($prix==null){
                 $this->addFlash('danger','Desolez nous n\'avons pas des voitures pour cette destination');
             }else{    

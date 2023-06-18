@@ -34,21 +34,11 @@ class Voiture
     #[ORM\Column]
     private ?int $NbPlace = null;
 
-    #[ORM\Column]
-    private ?bool $isArrived = null;
-
-
     #[ORM\OneToMany(mappedBy: 'voiture', targetEntity: Billet::class)]
     private Collection $Reservation;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateDepart = null;
-
     #[ORM\OneToMany(mappedBy: 'voitures', targetEntity: Place::class)]
     private Collection $places;
-
-
-
 
     public function __construct()
     {
@@ -127,29 +117,6 @@ class Voiture
         return $this;
     }
 
-    public function isIsArrived(): ?bool
-    {
-        $now = new DateTime();
-        if($this->getDateDepart()<$now){
-            $this->setIsArrived(true);
-        }
-        return $this->isArrived;
-    }
-
-    public function setIsArrived(bool $isArrived): self
-    {
-        $this->isArrived = $isArrived;
-        if($isArrived == true){
-            $place = $this->getPlace();
-            for($i=0;$i<=$this->getNbPlace();$i++){
-                $place[0]=true;
-                $place[$i]=false;
-            }
-            $this->setPlace($place);
-        }
-        return $this;
-    }
-
     public function __toString()
     {
         return $this->Numero;
@@ -181,18 +148,6 @@ class Voiture
                 $reservation->setVoiture(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getDateDepart(): ?\DateTimeInterface
-    {
-        return $this->dateDepart;
-    }
-
-    public function setDateDepart(?\DateTimeInterface $dateDepart): self
-    {
-        $this->dateDepart = $dateDepart;
 
         return $this;
     }

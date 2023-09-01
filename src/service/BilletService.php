@@ -17,6 +17,7 @@ class BilletService{
     protected PlaceRepository $placeRep;
     protected EntityManagerInterface $manager;
     protected VoitureRepository $voitureRep;
+
     public function __construct(DepartRepository $departRep,CategorieRepository $catRepo,DestinationRepository $destRep,PlaceRepository $placeRep,EntityManagerInterface $manager,VoitureRepository $voitureRep)
     {
         $this->departRep = $departRep;
@@ -48,8 +49,7 @@ class BilletService{
                 $places->setPlace($place);
         }
         $places->setDate($billet->getDateReservation());
-        $places->setVoitures($voiture);
-         
+        $places->setVoitures($voiture);     
         
         return $places;
     }

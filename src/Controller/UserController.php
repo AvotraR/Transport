@@ -12,6 +12,7 @@ use App\Repository\VoitureRepository;
 use App\Repository\CategorieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\DestinationRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -20,10 +21,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserController extends AbstractController
 {
     #[Route('/utilisateur/billet', name: 'App_user_billet')]
-    public function exemple(SessionInterface $session,BilletRepository $BilletRep,PlaceRepository $placeRep,EntityManagerInterface $manager,BilletService $service,Request $request,VoitureRepository $voitureRep){
+    public function exemple(SessionInterface $session,BilletRepository $BilletRep,PlaceRepository $placeRep,EntityManagerInterface $manager,BilletService $service,Request $request,VoitureRepository $voitureRep)
+    {
         $data=$session->get("datas");
         $billet = $session->get("billet");
         $prix=$data->get('prix');
+
         $voiture=$voitureRep->find($data->get('voitureId'));
         $AllBillet = $BilletRep->findBy(['User'=>$this->getUser()]);
         $placeEntity =$placeRep->findBy(['voitures'=>$voiture->getId(),'date'=>$billet->getDateReservation()]);
@@ -31,6 +34,7 @@ class UserController extends AbstractController
         
         $place=$data->get('place_prise');
         $pl=explode(',',$place);
+
         if(!$placeEntity){
             $newPlace = new Place();    
             $placeee=$voiture->getPlace();
@@ -42,11 +46,13 @@ class UserController extends AbstractController
         }
         
         $reservation = $service->reservationService($billet,$prix,$place,$voiture,$user);
+
         if(!($BilletRep->existeDeja($reservation))){
             $manager->persist($placeVoiture);
             $manager->persist($reservation);
             $manager->flush();
         }
+        
         return $this->render('user/UserPage.html.twig',[
             'voiture'=>$voiture,
             'place'=>$place,

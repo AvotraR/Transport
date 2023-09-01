@@ -16,7 +16,9 @@ class VoitureService{
     }
     
     public function editDate($datas){
+
         $voitures=$datas['voiture'];
+        
         foreach($voitures as $voiture){
             $v = $this->voitureRep->find($voiture);
             $v->setDateDepart(date_create($datas['date']));

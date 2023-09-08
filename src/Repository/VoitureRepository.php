@@ -50,10 +50,10 @@ class VoitureRepository extends ServiceEntityRepository
                            ->AndWhere('dest.id IN (:destination)')
                            ->setParameter('destination',$billet->getDestination());
         }
-        if($billet->getDateReservation()){
-            $query = $query->AndWhere('v.dateDepart IN (:date)')
-                           ->setParameter('date',$billet->getDateReservation());
-        }
+        // if($billet->getDateReservation()){
+        //     $query = $query->AndWhere('v.dateDepart IN (:date)')
+        //                    ->setParameter('date',$billet->getDateReservation());
+        // }
         return $query->getQuery()->getResult();
     }
 

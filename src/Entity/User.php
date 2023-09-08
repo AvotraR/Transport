@@ -73,10 +73,17 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     public function eraseCredentials(){
 
     }
+
     public function getRoles():array
     {
         return ['ROLE_USER'];
     }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
     public function getUserIdentifier():String{
         return (String)$this->numero;
     }

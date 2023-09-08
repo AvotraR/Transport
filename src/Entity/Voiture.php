@@ -34,21 +34,16 @@ class Voiture
     #[ORM\Column]
     private ?int $NbPlace = null;
 
-    #[ORM\Column]
-    private ?bool $isArrived = null;
-
-
     #[ORM\OneToMany(mappedBy: 'voiture', targetEntity: Billet::class)]
     private Collection $Reservation;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateDepart = null;
-
-
+    #[ORM\OneToMany(mappedBy: 'voitures', targetEntity: Place::class)]
+    private Collection $places;
 
     public function __construct()
     {
         $this->Reservation = new ArrayCollection();
+        $this->places = new ArrayCollection();
     }
 
 
@@ -122,29 +117,6 @@ class Voiture
         return $this;
     }
 
-    public function isIsArrived(): ?bool
-    {
-        $now = new DateTime();
-        if($this->getDateDepart()<$now){
-            $this->setIsArrived(true);
-        }
-        return $this->isArrived;
-    }
-
-    public function setIsArrived(bool $isArrived): self
-    {
-        $this->isArrived = $isArrived;
-        if($isArrived == true){
-            $place = $this->getPlace();
-            for($i=0;$i<=$this->getNbPlace();$i++){
-                $place[0]=true;
-                $place[$i]=false;
-            }
-            $this->setPlace($place);
-        }
-        return $this;
-    }
-
     public function __toString()
     {
         return $this->Numero;
@@ -180,16 +152,33 @@ class Voiture
         return $this;
     }
 
-    public function getDateDepart(): ?\DateTimeInterface
+    /**
+     * @return Collection<int, Place>
+     */
+    public function getPlaces(): Collection
     {
-        return $this->dateDepart;
+        return $this->places;
     }
 
-    public function setDateDepart(?\DateTimeInterface $dateDepart): self
+    public function addPlace(Place $place): self
     {
-        $this->dateDepart = $dateDepart;
+        if (!$this->places->contains($place)) {
+            $this->places[] = $place;
+            $place->setVoitures($this);
+        }
 
         return $this;
     }
 
+    public function removePlace(Place $place): self
+    {
+        if ($this->places->removeElement($place)) {
+            // set the owning side to null (unless already changed)
+            if ($place->getVoitures() === $this) {
+                $place->setVoitures(null);
+            }
+        }
+
+        return $this;
+    }
 }

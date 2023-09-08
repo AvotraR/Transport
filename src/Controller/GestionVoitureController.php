@@ -27,15 +27,19 @@ class GestionVoitureController extends AbstractController
     public function departVoiture(VoitureRepository $voiture,Request $request, VoitureService $v)
     {
         $Recherche = new Recherche();
+
         $form = $this->createForm(Recherche2Type::class,$Recherche);
         $form->handleRequest($request);
         $voitures = null;
+
         if($form->isSubmitted() && $form-> isValid()){
             $voitures = $voiture->searhVoit($Recherche);
         }
+
         if($request->query->count()>1){
             $v->editDate($request->query->all());
         }
+
         return $this->render('gestion_voiture/voiture.html.twig',[
                 'voitures' => $voitures,
                 'formBillet' => $form->createView()
@@ -45,20 +49,26 @@ class GestionVoitureController extends AbstractController
     public function gestionReservation(VoitureRepository $voiture,Request $request, VoitureService $v)
     {
         $Recherche = new Recherche();
+
         $form = $this->createForm(RechercheType::class,$Recherche);
         $form->handleRequest($request);
+
         $voitures = null;
+
         if($form->isSubmitted() && $form-> isValid()){
             $voitures = $voiture->searhVoit($Recherche);
         }
+
         return $this->render('gestion_voiture/reservation.html.twig',[
                 'voitures' => $voitures,
                 'formBillet' => $form->createView()
         ]);
     }
+
     #[Route('/reservation/?{id}/{date}', name:'liste_reservation_voiture')]
     public function voirReservation(Voiture $voiture,$date,BilletRepository $billetRep){
-            $billets = $billetRep->findBy(['DateReservation'=>date_create($date),'voiture'=>$voiture]);
+        $billets = $billetRep->findBy(['DateReservation'=>date_create($date),'voiture'=>$voiture]);
+        
         return $this->render('gestion_voiture/liste_R.html.twig',[
             'billets' => $billets,
             'date'=>$date

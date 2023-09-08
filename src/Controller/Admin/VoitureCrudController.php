@@ -25,10 +25,8 @@ class VoitureCrudController extends AbstractCrudController
             TextField::new('Numero'),
             AssociationField::new('categorie'),
             AssociationField::new('Destination'),
-            NumberField::new('NbPlace'),
-            BooleanField::new('isArrived'),
+            NumberField::new('NbPlace')
             //CollectionField::new('Place')->setEntryType(CheckboxType::class)->allowDelete(false),
-            DateField::new('dateDepart'),
         ];
     }
 }

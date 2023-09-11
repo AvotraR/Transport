@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\GestionVoiture;
 
 use App\Entity\Voiture;
 use App\Entity\Recherche;

@@ -13,6 +13,7 @@
                                     <h5>Votre reservation:</h5>
                                 </div>
                                 <div class="billet-body">
+                                {% if(voiture and place and billet and prix)%}
                                     <ul>
                                         <li class="list-group">
                                             <div class="d-flex">
@@ -75,6 +76,9 @@
                                             </div>
                                         </li>
                                     </ul>
+                                {%else%}
+                                    <h1> Vide pour le moment...</h1>
+                                {%endif%}
                                 </div>
                             </div>
                             {%endif%}

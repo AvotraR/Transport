@@ -1,7 +1,11 @@
 {% extends 'base.html.twig'%}
-{% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{asset('css/yy.css')}}">
-{% endblock %}
+    {% block stylesheets %}
+        {{encore_entry_link_tags('Edit')}}
+        {{encore_entry_link_tags('app')}}
+    {% endblock %}
+    {% block javascripts %}
+        {{encore_entry_link_tags('Edit')}}
+    {% endblock %}
 {% block body %}
 <section id="car-resevation">
     <div class="title-head">

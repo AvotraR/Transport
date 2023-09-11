@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Security;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
@@ -14,28 +14,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class LoginController extends AbstractController
 {
-    #[Route('/inscription', name:"app_registration")]
-    public function registration (Request $request, EntityManagerInterface $manager,UserPasswordHasherInterface $encoder)
-    {
-        $user = new User();
-
-        $form=$this->createForm(RegistrationType::class,$user);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-            $hash = $encoder->hashPassword($user ,$user->getPassword());
-            $user->setPassword($hash);
-
-            $manager->persist($user);
-            $manager->flush();
-
-            return $this->redirectToRoute('app_login');
-        }
-        
-        return $this->render('security/registration.html.twig',[
-            'form' => $form->createView()
-        ]);
-    }    
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {

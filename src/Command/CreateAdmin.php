@@ -11,6 +11,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+/**
+ * class for create admin
+ */
 Class CreateAdmin extends Command{
 
     protected EntityManagerInterface $manager;
@@ -18,16 +21,31 @@ Class CreateAdmin extends Command{
 
     protected static $defaultName = 'transport:create:admin';
 
+    /**
+     * CreateAdmin constructor
+     * @param EntityManagerInterface $manager
+     * @param UserPasswordHasherInterface $encoder
+     */
     public function __construct(EntityManagerInterface $manager, UserPasswordHasherInterface $encoder){
         $this->manager = $manager;
         $this->encoder = $encoder;
         parent::__construct();
     } 
 
+    /**
+     * configuration and description of the command
+     */
     public function configure(){
         $this->setDescription("Creation d'une utilisateur Administrateur");
     }
 
+    /**
+     * command for create admin
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * 
+     * @return int|void|null
+     */
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $style = new SymfonyStyle($input, $output);

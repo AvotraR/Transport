@@ -1,3 +1,3 @@
-body {
-    background-color: lightgray;
-}
+@import './bundle/bootstrap.css';
+@import './bundle/fontawesome.min.css';
+@import './style.css';

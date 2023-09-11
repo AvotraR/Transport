@@ -1,3 +1,4 @@
+require('../styles/Edit.css')
 
 (function () {
     const input = document.getElementsByTagName('input');

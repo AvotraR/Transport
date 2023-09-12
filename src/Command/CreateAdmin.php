@@ -62,6 +62,7 @@ Class CreateAdmin extends Command{
         $user->setPrenom($prenom);
         $user->setNumero($numero);
         $user->setEmail($email);
+        $user->setRole('ROLE_ADMIN');
         $user->setPassword($this->encoder->hashPassword($user, $password));
 
         $this->manager->persist($user);

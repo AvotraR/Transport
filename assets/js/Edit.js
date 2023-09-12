@@ -1,3 +1,2 @@
-
-require('../styles/Edit.css')
-require('./editPlace')
+require('../styles/Edit.css');
+require('./place/Place.js')

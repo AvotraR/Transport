@@ -34,6 +34,9 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $Email = null;
 
+    #[ORM\Column(length: 180)]
+    private ?string $role = null;
+
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Billet::class)]
     private Collection $billets;
 
@@ -74,9 +77,21 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
 
     }
 
+    public function getRole()
+    {
+        $role = $this->role;
+        // guarantee every user at least has ROLE_USE
+        return $role;
+    }
+
+    public function setRole($role): self
+    {
+        $this->role = $role;
+        return $this;
+    }
     public function getRoles():array
     {
-        return ['ROLE_USER'];
+        return array($this->role);
     }
 
     /**

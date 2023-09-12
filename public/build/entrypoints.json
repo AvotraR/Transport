@@ -3,8 +3,8 @@
     "app": {
       "js": [
         "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_is-array_js-n-3b47a5.js",
-        "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_da-03e5c3.js",
+        "http://localhost:8080/build/vendors-node_modules_core-js_internals_array-iteration_js-node_modules_core-js_internals_dom--7e656a.js",
+        "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_core-js_modules_es_da-077b9c.js",
         "http://localhost:8080/build/app.js"
       ],
       "css": [
@@ -14,7 +14,7 @@
     "Edit": {
       "js": [
         "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_is-array_js-n-3b47a5.js",
+        "http://localhost:8080/build/vendors-node_modules_core-js_internals_array-iteration_js-node_modules_core-js_internals_dom--7e656a.js",
         "http://localhost:8080/build/Edit.js"
       ],
       "css": [
